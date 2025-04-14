@@ -21,15 +21,15 @@ export const routes: Routes = [
         (m) => m.BlankComponent
       ),
     children: [
-      // { path: '', redirectTo: 'home', pathMatch: 'full' },
-      // {
-      //   path: 'home',
-      //   loadComponent: () =>
-      //     import('./component/home/home.component').then(
-      //       (m) => m.HomeComponent
-      //     ),
-      //   title: 'home',
-      // },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./component/home/home.component').then(
+            (m) => m.HomeComponent
+          ),
+        title: 'home',
+      },
       {
         path: 'product/:name',
         loadComponent: () =>
@@ -53,6 +53,14 @@ export const routes: Routes = [
             (m) => m.WishlistComponent
           ),
         title: 'wishlist',
+      },
+      {
+        path: '**',
+        loadComponent: () =>
+          import('./component//not-found/not-found.component').then(
+            (m) => m.NotFoundComponent
+          ),
+        title: 'notFound',
       },
       
     ],
