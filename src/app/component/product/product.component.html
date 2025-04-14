@@ -1,0 +1,149 @@
+<!-- <section class="my-4">
+    <h2 class="d-flex justify-content-center">Popular Prodects</h2>
+    <div class="row g-4">
+        <div class="col-md-3" *ngFor="let item of products.slice(0,12) |search:' ' ">
+            <div class="product " >
+               <!-- <div class=" p-2 cursor-pointer" [routerLink]="['/details',item._id]"> -->
+                <!-- <div class=" p-2 cursor-pointer">
+                <! <img [src]="item.imageCover" class="w-100" [alt]="item.title"> --> 
+                <!-- <img  height="200"[src]="item.image_url" class="w-100" [alt]="item.title"> -->
+                <!-- <h3 class="h6">{{item.category.name}}</h3> -->
+                <!-- <h3 class="h6">{{item.publisher}}</h3>
+                <h4 class="h6">{{item.title |termText :2}}</h4> --> 
+                <!-- <div class="d-flex align-items-center justify-content-between">
+                    <! <span>{{item.price |currency:'EGP' }}</span> -->
+                    <!-- <div><i class="fas fa-star rating-color"></i>
+                    <span class="text-muted">{{item.ratingsAverage}}</span> -->
+
+                <!-- </div> -->
+                <!-- </div>  -->
+               <!-- </div>
+                <button class="btn-main w-100">Add Product</button> -->
+            <!-- </div> -->
+        <!-- </div> -->
+    <!-- </div> -->
+<!-- </section> --> 
+
+<!-- <section class="my-4">
+ 
+    <h2 class="d-flex justify-content-center">Popular Products</h2>
+    <input type="search" class="form-control w-50 mx-auto my-3" placeholder="Search....." [(ngModel)]="searchTerm"/> 
+    <h2 class="">{{categoryName}}</h2>
+   <div class="row g-4" *ngIf="products.length > 0">
+      <div class="col-md-3" *ngFor="let item of products | search:searchTerm ">
+        <div class="product">
+          <div class="p-2 cursor-pointer">
+            <img height="200" [src]="item.productPicture" class="w-100" [alt]="item.productName" />
+            <h3 class="h6">{{ item.productName }}</h3>
+            <h4 class="h6">{{ item.description  }}</h4>
+          </div>
+          <button class="btn-main w-100">Add Product</button>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="products.length === 0" class="text-center mt-4">
+      <p class="text-muted">No products found in this category.</p>
+    </div>
+  </section> -->
+
+  <section class="my-4">
+    <h2 class="d-flex justify-content-center">Popular Products</h2>
+    
+    
+    <input type="search" class="form-control w-50 mx-auto my-3" placeholder="Search....." [(ngModel)]="searchTerm"/>
+    <h2 class="">{{categoryName}}</h2>
+  
+     
+<!-- Filters and Sorting in same row -->
+<div class="row mb-4 px-4 justify-content-center align-items-end text-center">
+  <!-- Sort by price -->
+  <div class="col-md-2">
+    <label class="form-label">Sort by price</label>
+    <select class="form-select" (change)="onSortChange($event)">
+      <option value="">Default</option>
+      <option value="lowest price">Lowest to Highest</option>
+      <option value="highest price">Highest to Lowest</option>
+    </select>
+  </div>
+
+  <!-- Color Filter -->
+  <div class="col-md-2">
+    <label class="form-label">Color</label>
+    <select class="form-select" [(ngModel)]="selectedColor" (change)="applyFilters()">
+      <option value="">All</option>
+      <option value="Red">Red</option>
+      <option value="Black">Black</option>
+      <option value="White">White</option>
+    </select>
+  </div>
+
+  <!-- Size Filter -->
+  <div class="col-md-2">
+    <label class="form-label">Size</label>
+    <select class="form-select" [(ngModel)]="selectedSize" (change)="applyFilters()">
+      <option value="">All</option>
+      <option value="S">S</option>
+      <option value="M">M</option>
+      <option value="L">L</option>
+    </select>
+  </div>
+
+  <!-- SubCategory Filter -->
+  <div class="col-md-3">
+    <label class="form-label">SubCategory</label>
+    <select class="form-select" [(ngModel)]="selectedSubCategory" (change)="applyFilters()">
+      <option value="">All</option>
+      <option value="Sweatshirts">Sweatshirts</option>
+      <option value="Shirts">Shirts</option>
+      <option value="Trousers">Trousers</option>
+      <option value="Jackets">Jackets</option>
+      <option value="Vests">Vests</option>
+      <option value="Shorts">Shorts</option>
+    </select>
+  </div>
+  <!-- إضافة dropdown لفرز السعر -->
+<div class="col-md-3">
+  <label class="form-label">Sort by Price</label>
+  <select class="form-select" [(ngModel)]="selectedSort" (change)="applyFilters()">
+    <option value="">Default</option>
+    <option value="lowest price">Lowest to Highest</option>
+    <option value="highest price">Highest to Lowest</option>
+  </select>
+</div>
+</div>
+    <!-- Dropdown for sorting by price
+    <div class="dropdown mb-3 ms-auto text-end">
+      <select class="form-select w-auto d-inline-block" (change)="onSortChange($event)">
+        <option value="">Sort by price</option>
+        <option value="lowest price">Lowest to Highest</option>
+        <option value="highest price">Highest to Lowest</option>
+      </select>
+    </div> -->
+    
+  
+    <div class="row g-4" *ngIf="products.length > 0">
+      <div class="col-md-3" *ngFor="let item of products | search:searchTerm">
+        <div class="product">
+          <div class="p-2 cursor-pointer">
+            <img height="200" [src]="item.productPicture" class="w-100" [alt]="item.productName" />
+            <h3 class="h6">{{ item.productName }}</h3>
+            <h4 class="h6">{{ item.description }}</h4>
+            <div class="d-flex align-items-center justify-content-between"  *ngFor="let variant of item.productVariants">
+                 <span>{{variant.price |currency:'EGP' }} </span> 
+        
+
+                </div>
+          </div>
+          <button (click)=" addCart(item)" class="btn-main w-100">Add Product</button>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="products.length === 0" class="text-center mt-4">
+      <p class="text-muted">No products found in this category.</p>
+    </div>
+  </section>
+  
+
+
