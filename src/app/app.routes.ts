@@ -7,6 +7,9 @@ import { RegisterComponent } from './component/register/register.component';
 import { LoginComponent } from './component/login/login.component';
 import { ProductComponent } from './component/product/product.component';
 import { Routes } from '@angular/router';
+import { HomeComponent } from './component/home/home.component';
+import { NotFoundComponent } from './component/not-found/not-found.component';
+import { TestComponent } from './component/test/test.component';
 
 export const routes: Routes = [
   {
