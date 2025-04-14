@@ -1,0 +1,85 @@
+<section class="bg-main-light p-4 rounded my-3 mx-auto w-75">
+  <h1>Login Now</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="getDataForm()">
+    <div class="mb-2">
+      <label for="email"> email:</label>
+      <input
+        #inputEmail
+        formControlName="email"
+        type="email"
+        id="email"
+        class="form-control"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          loginForm.get('email')?.errors &&
+          (loginForm.get('email')?.touched || inputEmail.value.length > 0)
+        "
+      >
+        <p *ngIf="loginForm.get('email')?.getError('required')">
+          email is Required
+        </p>
+        <p *ngIf="loginForm.get('email')?.getError('email')">email in valid</p>
+      </div>
+    </div>
+    <div class="mb-2">
+      <label for="password"> password:</label>
+      <input
+        #inputPassword
+        formControlName="password"
+        type="password"
+        id="password"
+        class="form-control"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          loginForm.get('password')?.errors &&
+          (loginForm.get('password')?.touched || inputPassword.value.length > 0)
+        "
+      >
+        <p *ngIf="loginForm.get('password')?.getError('required')">
+          password is Required
+        </p>
+        <p *ngIf="loginForm.get('password')?.getError('pattern')">
+          Password must contain:<br />
+          - Minimum 6 characters<br />
+          - One uppercase letter<br />
+          - One lowercase letter<br />
+          - One number<br />
+          - One special character<br />
+        </p>
+      </div>
+    </div>
+    <label>
+      <input
+        type="checkbox"
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="rememberMe"
+      />
+      Remember Me
+    </label>
+
+    <div>
+      <span>
+        Not signed up yet
+        <a class="col cursor-pointer" [routerLink]="'/register'"
+          >Create account</a
+        ></span
+      >
+    </div>
+    <div>
+      <a class="col cursor-pointer" [routerLink]="'/forget'"
+        >Forget Password ?</a
+      >
+    </div>
+
+    <button class="btn-main ms-auto d-block">
+      <i *ngIf="isLoding" class="fas fa-spin fa-spinner"></i>
+      Login
+    </button>
+
+    <p *ngIf="msgError" class="alert alert-danger">{{ msgError }}</p>
+  </form>
+</section>

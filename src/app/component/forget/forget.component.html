@@ -1,0 +1,138 @@
+<section
+  *ngIf="step1"
+  class="bg-main-light p-5 rounded my-5 w-100 mx-auto shadow"
+>
+  <div class="container">
+    <h2 class="text-center">Please enter your verification mail</h2>
+    <form [formGroup]="forgetForm" (ngSubmit)="forgetPass()">
+      <label for="email"></label>
+      <input
+        formControlName="email"
+        type="email"
+        id="email"
+        placeholder="Email"
+        class="form-control mb-3"
+      />
+      <button class="btn bg-main text-light  w-100">Forget Password</button>
+      <p *ngIf="msg" class="alert alert-danger mt-2">{{ msg }}</p>
+    </form>
+  </div>
+</section>
+<section
+  *ngIf="step2"
+  class="bg-main-light w-100 my-5 rounded p-5 shadow mx-auto"
+>
+  <div class="container text-center">
+    <i class="fas fa-check-circle" style="font-size: 40px; color: rgb(2, 2, 65);"></i>
+    <h3>Please check your inbox or spam / junk folder.</h3>
+    <p>Your password resetblink has been sent to your<SPan class="fw-bold">{{email}}</SPan>email address.<br> Please continue process by clicking the link in your e-mail.</p>
+    <!-- <button class="btn bg-main text-light mt-3" (click)="goToResetStep()">Continue</button> -->
+  </div>
+</section>
+<!-- <section
+  *ngIf="step3"
+  class="bg-main-light my-5 w-100 rounded p-5 shadow mx-auto"
+>
+  <div class="container">
+    <h2 class="text-center">Reset your password</h2>
+    <form [formGroup]="resetPassForm1" (ngSubmit)="resetPss()">
+      <label for="email">Email</label>
+      <input
+        formControlName="email"
+        type="email"
+        id="email"
+        placeholder="Email"
+        class="form-control mb-3"
+      />
+
+      <label for="newPassword">New Password</label>
+      <input
+        formControlName="newPassword"
+        type="password"
+        id="newPassword"
+        placeholder="New Password"
+        class="form-control mb-3"
+      />
+
+      <div
+        class="alert alert-danger mt-3"
+        *ngIf="
+          resetPassForm.get('newPassword')?.errors &&
+          (resetPassForm.get('newPassword')?.touched || resetPassForm.get('newPassword')?.value.length > 0)
+        "
+      >
+        <p *ngIf="resetPassForm.get('newPassword')?.getError('pattern')">
+          Password must contain:<br />
+          - Minimum 6 characters<br />
+          - One uppercase letter<br />
+          - One lowercase letter<br />
+          - One number<br />
+          - One special character<br />
+        </p>
+      </div>
+
+      <button class="btn bg-main text-light w-100">Reset Password</button>
+      <p *ngIf="msg" class="alert alert-danger mt-2">{{ msg }}</p>
+    </form>
+  </div>
+</section> -->
+
+<!-- --------------------------------------------------- -->
+
+<!-- <section
+  *ngIf="step2"
+  class="bg-main-light my-5 w-100 rounded p-5 shadow mx-auto"
+>
+  <div class="container">
+    <form [formGroup]="resetPassForm" (ngSubmit)="resetPss()">
+      <label for="New Password">New Password</label>
+      <input
+        #inputPass
+        formControlName="newPassword"
+        type="password"
+        id="New Password"
+        placeholder="New Password"
+        class="form-control mb-3"
+      />
+      <div
+        class="alert alert-danger mt-3"
+        *ngIf="
+          resetPassForm.get('newPassword')?.errors &&
+          (resetPassForm.get('newPassword')?.touched ||
+            inputPass.value.length > 0)
+        "
+      >
+        <p *ngIf="resetPassForm.get('newPassword')?.getError('pattern')">
+          Password must contain:<br />
+          - Minimum 6 characters<br />
+          - One uppercase letter<br />
+          - One lowercase letter<br />
+          - One number<br />
+          - One special character<br />
+        </p>
+      </div>
+      <button class="btn bg-main text-light  w-100">Reset Password</button>
+      <p *ngIf="msg" class="alert alert-danger mt-2">{{ msg }}</p>
+    </form>
+  </div>
+</section> -->
+<!-- <section
+  *ngIf="step3"
+  class="bg-main-light w-100 my-5 rounded p-5 shadow mx-auto"
+>
+  <div class="container">
+    <form [formGroup]="resetCodeForm" (ngSubmit)="resetCode()">
+      <label for="code">Reset Code</label>
+      <input
+        formControlName="resetCode"
+        type="text"
+        id="code"
+        placeholder="Code"
+        class="form-control mb-3"
+      />
+      <button class="btn bg-main text-light  w-100">Reset Code</button>
+      <p *ngIf="msg" class="alert alert-danger mt-2">{{ msg }}</p>
+    </form>
+  </div>
+</section> -->
+
