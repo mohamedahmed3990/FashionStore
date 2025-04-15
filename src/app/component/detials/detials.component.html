@@ -1,1 +1,207 @@
-<p>detials works!</p>
+<section>
+    <div class="container mt-5">
+        <div class=" d-flex justify-content-center mx-auto ml-4">
+            <div class="col-md-8 bg-secondry w-50 me-5 ">  
+            <img [src]="productDetials.productPicture" [alt]="productDetials.categoryName" class="w-100 h-50">
+                     <!-- slider of images -->
+              <!-- <owl-carousel-o [options]="customOptions">
+
+                <ng-container *ngFor="let item of productDetials.images">
+                  <ng-template carouselSlide>
+                    <img [src]="item" >
+                  </ng-template>
+                </ng-container>
+            
+              </owl-carousel-o> -->
+
+               
+               
+            </div>
+    
+    
+            <div class="col-md-4 "> 
+                <h3 class=" h5 mt-2"> {{  productDetials.productName }}</h3>
+                <hr>
+                <p class="text-muted "> cash Price </p>
+                 <span class="text-bold  mt-2" *ngFor="let item of productDetials.productVariants">{{ item.price}} EGP</span>
+                <hr>
+                <h6 class="text-bold text-muted">Size</h6>
+                <div class="d-flex flex-column gap-3">
+                  <!-- <button 
+                    *ngFor="let size of sizes" 
+                    class="btn btn-primary size-btn" 
+                    [ngClass]="{'btn-primary': selectedSize === size, 'btn-outline-secondary': selectedSize !== size}" 
+                    (click)="selectSize(size)">
+                    {{ size }}
+                  </button> -->
+                  <div class="d-flex flex-column"></div>
+                  <div class="d-flex ">
+                    <button 
+                      *ngFor="let size of sizes" 
+                      class="btn size-btn"
+                      [ngClass]="{'btn-main': selectedSize?.name === size.name, 'btn-outline-secondary': selectedSize?.name !== size.name}" 
+                      (click)="selectSize(size)"> 
+                      {{ size.name }}
+                    </button>
+                  </div>
+                
+<!-- ----------- -->
+
+  
+  <!-- الألوان (في سطر جديد مع اسم اللون فوق الزرار) -->
+  <div class="d-flex ">
+    <div *ngFor="let color of colors">
+      <div class="text-center mb-2">
+        <span>{{ color.name }}</span>
+      </div>
+      <button 
+        class="btn size-btn w-auto"
+        [ngClass]="{'btn-primary': selectedColor?.id === color.id, 'btn-outline-secondary': selectedColor?.id !== color.id}" 
+        (click)="selectColor(color)"
+        [ngStyle]="{ 'background-color': selectedColor?.id === color.id ? color.hexa : '', 'height': '40px', 'width': 'auto' }">
+        
+        <span 
+          class="rounded-circle d-inline-block "
+          [ngStyle]="{ 'background-color': color.hexa }"
+          style="width: 18px; height: 18px;">
+        </span>
+      </button>
+    </div>
+  </div>
+  
+  
+  
+  
+<!-- ---------------------------------color -->
+
+                  
+
+                </div>
+            
+                <button 
+                (click)="addCart()" 
+                  class="w-100 btn-main mt-3">
+                  ADD TO CART
+                </button>
+                    <div class="container my-4">
+                      
+                        <div class="border-bottom pb-2 mb-3">
+                          <button class="btn btn-link d-flex justify-content-between w-100 text-start"  (click)="toggleDescription()">
+                            <span class="text-primary"> 
+                                <i class="fa-solid fa-shirt"></i>
+                                DESCRIPTION</span>
+                            <i [ngClass]="{'bi bi-chevron-down': !isDescriptionOpen, 'bi bi-chevron-up': isDescriptionOpen}"></i>
+                          </button>
+                        </div>
+                      
+                        <div *ngIf="isDescriptionOpen" class="mb-3">
+                          <div >
+                           <p>
+                            {{productDetials.description}}
+                           </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <div class="pt-3">
+                      
+                            <div class="border-bottom pb-2 mb-3">
+                              <button class="btn btn-link d-flex justify-content-between w-100 text-start" (click)="washinglist()">
+                                <span class="text-primary"> 
+                                    <i class="fa-solid fa-soap"></i>
+                                    WASHING</span>
+                                <i [ngClass]="{'bi bi-chevron-down': !WashingOpen, 'bi bi-chevron-up': WashingOpen}"></i>
+                              </button>
+                            </div>
+                          
+                            <div *ngIf="WashingOpen" class="" routerLink="/footer">
+                               <button class="size-btn text-muted mx-auto bg-secondry" routerLink="return"> How to wash your clothes?  </button>
+                            </div>
+                          </div>
+
+                          <div>
+                            <div class=" pt-3">
+                          
+                                <div class="border-bottom pb-2 mb-3">
+                                  <button class="btn btn-link d-flex justify-content-between w-100 text-start" (click)="delivary()">
+                                    <span class="text-primary"> 
+                                        
+                                        DELIVARY , RETURN AND EXCHANGE</span>
+                                    <i [ngClass]="{'bi bi-chevron-down': !delivary, 'bi bi-chevron-up': delivary}"></i>
+                                  </button>
+                                </div>
+                              
+                                <div *ngIf="Delivary" class="" routerLink="/footer">
+                                  <p>
+                                    In case of the product you purchased is unused, you can return it within 
+                                    30 days with its original packaging
+                                  </p>
+                                   <button class="size-btn text-muted mx-auto bg-secondry" routerLink="/return" > Click for details information.  </button>
+                                </div>
+                              </div>
+                        </div>  
+          
+                    </div>
+
+
+                    </div>
+    
+           
+                 
+          </div>
+            
+    </div>
+
+    <div class="row g-4 mt-5" *ngIf="products.length > 0">
+        <div class="col-md-3" *ngFor="let item of products ">
+          <div class="product">
+            <div class="p-2 cursor-pointer" [routerLink]="['/detials' , item.productId]"  >
+              <img height="200" [src]="item.productPicture" class="w-100" [alt]="item.productName" />
+              <h3 class="h6">{{ item.productName }}</h3>
+              <h4 class="h6">{{ item.description }}</h4>
+              <div class="d-flex align-items-center justify-content-between"  *ngFor="let variant of item.productVariants">
+                   <span>{{variant.price |currency:'EGP' }} </span> 
+          
+  
+                  </div>
+            </div>
+            <!-- (click)=" addCart(item)"  -->
+            <button 
+            class="btn-main w-100">Add Product</button>
+          </div>
+        </div>
+      </div>
+
+        
+        <!-- products -->
+
+        <!-- <div class="row g-4 pt-5">
+            <div class="col-md-2" *ngFor="let item of products ">
+                <div class="produts " >
+                           
+                     <div class=" p-2 cursor-pointer" [routerLink]="['/detials', item._id]" >
+
+                        <img [src]="item.imageCover" class="w-100" [alt]="item.title">
+                     
+                        <h3 class="h6">{{item.category.name}}</h3>
+                     <h4 class="h6">{{item.title | buy: 2 }}</h4>
+                       
+                     <div class="d-flex justify-content-between align-items-center ">
+                        <span>{{ item.price}}EGP</span>
+                        <div>
+                            <i class="fas fa-star rating-color"></i>
+                            <span class="text-muted">{{ item.ratingsAverage}}</span>
+                        </div>
+                     </div>
+                     </div>
+                    
+                </div>
+                 <!-- <button      (click)="addCart(item._id)"  class="btn-main w-100">Add To Cart</button>  -->
+
+                 
+            <!-- </div> -->
+           <!-- </div> --> -->
+    
+
+</section>

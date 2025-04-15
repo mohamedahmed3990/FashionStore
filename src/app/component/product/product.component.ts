@@ -3,7 +3,7 @@ import { myhttpInterceptor } from './../../shared/interceptor/myhttp.interceptor
 import { SearchPipe } from './../../shared/pipe/search.pipe';
 import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { GetproductService } from '../../shared/service/getproduct.service';
-import { Productcart, ProductInerface } from '../../shared/interface/product-inerface';
+import {  ProductInerface } from '../../shared/interface/product-inerface';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Pipe, PipeTransform } from '@angular/core';
@@ -17,12 +17,12 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule, FormsModule,SearchPipe],
+  imports: [CommonModule, FormsModule,SearchPipe , RouterLink],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
 export class ProductComponent implements  OnInit , OnDestroy {
-constructor(private _GetproductService:GetproductService , private _ActivatedRoute:ActivatedRoute,private _CartserviceService:CartserviceService,private _ToastrService:ToastrService){}
+constructor(private _GetproductService:GetproductService , private _ActivatedRoute:ActivatedRoute,private _CartserviceService:CartserviceService,private _ToastrService:ToastrService ){}
 products:ProductInerface[]=[];
 
   categoryName: string = '';
@@ -106,7 +106,7 @@ products:ProductInerface[]=[];
     // this._CartserviceService.addToCart(productToSend).subscribe({
       next: (response) => {
         this.cartDetails = response;
-        this._CartserviceService.cartNumber.next(response.numOfCartItems);
+        // this._CartserviceService.cartNumber.next(response.numOfCartItems);
         this._ToastrService.success(response.message);
       },
       error: (err) => {

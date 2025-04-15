@@ -125,7 +125,7 @@
     <div class="row g-4" *ngIf="products.length > 0">
       <div class="col-md-3" *ngFor="let item of products | search:searchTerm">
         <div class="product">
-          <div class="p-2 cursor-pointer">
+          <div class="p-2 cursor-pointer" [routerLink]="['/detials' , item.productId]"  >
             <img height="200" [src]="item.productPicture" class="w-100" [alt]="item.productName" />
             <h3 class="h6">{{ item.productName }}</h3>
             <h4 class="h6">{{ item.description }}</h4>

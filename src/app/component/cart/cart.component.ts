@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { CartserviceService } from '../../shared/service/cartservice.service';
 import { ToastrService } from 'ngx-toastr';
 import { GetproductService } from '../../shared/service/getproduct.service';
-import {  ProductInerface } from '../../shared/interface/product-inerface';
+import {  IBasket, IBasketItem, ProductInerface } from '../../shared/interface/product-inerface';
+import { UUIDTypes, v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-cart',
@@ -17,14 +18,25 @@ import {  ProductInerface } from '../../shared/interface/product-inerface';
     constructor( private _CartService :CartserviceService, private _ToastrService:ToastrService , private _GetproductService:GetproductService ){}
      
     cartDetails:any={}
-      // products:Product[]=[]
+      products:IBasket={} as IBasket;
+
   
     ngOnInit(): void {
-      this._CartService.getUserCart().subscribe({
+      let basketIddFromStorage: string | null = localStorage.getItem('basketId');
+
+      if (!basketIddFromStorage) {
+        // لو ما لقيتش القيمة في localStorage، تولدي UUID جديد أو تعيّني قيمة افتراضية
+        basketIddFromStorage = uuidv4(); // مثلاً باستخدام uuidv4()
+        localStorage.setItem('basketId', basketIddFromStorage);
+      }
+      
+      // دلوقتي نقدر نحدد متغير من نوع string
+      let basketIdd: string = basketIddFromStorage;
+      this._CartService.getUserCart(basketIdd).subscribe({
         next:(response )=>{
           console.log(response);
           
-          this.cartDetails=response
+          this.products=response
           
         },
         error:(err)=>{
@@ -35,12 +47,12 @@ import {  ProductInerface } from '../../shared/interface/product-inerface';
       // this.SimilarProudect( );
     }
      
-    removeCartItem( id:string ):void{
+    removeCartItem( id:number ):void{
       this._CartService.removeItem( id).subscribe({
         next:( response )=>{
           console.log(response.data);
           
-          this.cartDetails=response.data;
+          this.products=response;
         },
         error:(err)=>{ 
           console.log(err);
@@ -50,19 +62,19 @@ import {  ProductInerface } from '../../shared/interface/product-inerface';
       })
     }
     
-    changeCount( id:string,count:number ):void{
-     if( count>0 ){
-      this._CartService.updateCartProduct( id,count ).subscribe({
-        next:( response )=>{
-          this.cartDetails=response.data
-        },
-        error:(err)=>{
-          console.log(err);
+    // changeCount( id:string,count:number ):void{
+    //  if( count>0 ){
+    //   this._CartService.updateCartProduct( id,count ).subscribe({
+    //     next:( response )=>{
+    //       this.products=response
+    //     },
+    //     error:(err)=>{
+    //       console.log(err);
           
-        }
-      })
-     }
-    }
+    //     }
+    //   })
+    //  }
+    // }
   
     // SimilarProudect(name:string ): void{
     //   this._GetproductService.getAllProduct(name).subscribe({

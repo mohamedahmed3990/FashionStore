@@ -1,3 +1,4 @@
+import { DetialsComponent } from './component/detials/detials.component';
 import { WishlistComponent } from './component/wishlist/wishlist.component';
 import { CartComponent } from './component/cart/cart.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
@@ -63,6 +64,7 @@ export const routes: Routes = [
         title: 'wishlist',
       },
       {
+        path: 'detials/:id',
         path: 'order-address',
         loadComponent: () =>
           import('./component/order-address/order-address.component').then(

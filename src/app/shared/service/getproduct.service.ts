@@ -26,14 +26,9 @@ export class GetproductService {
       `https://localhost:7041/api/ProductVariant/filter?category=${name}&sortBy=${sortBy}&color=${color}&size=${size}&subCategory=${subCategory}`
     );
   }
-
-
-  // getProductSortedPrice(name:any):Observable<any>{
-  //   // return this._HttpClient.get(`https://ecommerce.routemisr.com/api/v1/products`)
-  //   return this._HttpClient.get(`https://localhost:7041/api/ProductVariant/filter?sortBy=${name}`)
-  // }
-  
+getProductDetilas(id:number):Observable<any>{
+  return this._HttpClient.get(`https://localhost:7041/api/Product/details/${id}`)
 }
-// getProductDetilas(id:string):Observable<any>{
-//   return this._HttpClient.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`)
-// }
+
+ 
+}
