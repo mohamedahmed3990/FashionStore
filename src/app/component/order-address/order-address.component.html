@@ -1,0 +1,55 @@
+<div class="container my-4">
+  <h5 class="mb-3">1. Address Information</h5>
+
+  <form (ngSubmit)="submit()" #addressForm="ngForm" class="card p-4">
+    <div class="mb-3">
+      <label for="country" class="form-label">Country</label>
+      <input
+        type="text"
+        class="form-control"
+        id="country"
+        [(ngModel)]="address.country"
+        name="country"
+        required
+        placeholder="Enter country"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="city" class="form-label">City</label>
+      <input
+        type="text"
+        class="form-control"
+        id="city"
+        [(ngModel)]="address.city"
+        name="city"
+        required
+        placeholder="Enter city"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="addressDetails" class="form-label">Address Details</label>
+      <textarea
+        class="form-control"
+        id="addressDetails"
+        rows="3"
+        [(ngModel)]="address.addressDetails"
+        name="addressDetails"
+        required
+        placeholder="Enter the full address"
+      ></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Submit</button>
+
+    <div
+      *ngIf="message"
+      class="mt-3 alert"
+      [class.alert-success]="message.includes('successfully')"
+      [class.alert-danger]="message.includes('Failed')"
+    >
+      {{ message }}
+    </div>
+  </form>
+</div>

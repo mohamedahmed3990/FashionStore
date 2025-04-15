@@ -38,3 +38,20 @@ export interface Productcart {
   price: number
   quantity: number
 }
+
+
+
+
+export interface IOrderAddress{
+country:string,
+  city: string,
+  addressDetails: string
+}
+
+export interface IUserProfile {
+  email: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  userName: string;
+}
