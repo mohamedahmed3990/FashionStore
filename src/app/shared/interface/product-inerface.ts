@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 export interface ProductInerface {
   productId: number
   productName: string
@@ -27,14 +28,30 @@ export interface Size {
 
 
 
+export interface IBasket {
+    id: string;
+    items: IBasketItem[];
 
-export interface Productcart {
-  id: number
-  productName: string;
-  pictureUrl: string
-  color: string
-  size: string
-  category: string
-  price: number
-  quantity: number
+}
+
+export interface IBasketItem {
+    id: number;
+    productName: string;
+    price: number;
+    quantity: number;
+    pictureUrl: string;
+    size: string;
+    category: string;
+    color:string;
+}
+
+export class Basket implements IBasket {
+    id = uuidv4();
+    items: IBasketItem[] = [];
+}
+
+export interface IBasketTotals {
+    shipping: number;
+    subtotal: number;
+    total: number;
 }
