@@ -64,7 +64,7 @@ export const routes: Routes = [
         title: 'wishlist',
       },
       {
-        path: 'detials/:id',
+       
         path: 'order-address',
         loadComponent: () =>
           import('./component/order-address/order-address.component').then(
