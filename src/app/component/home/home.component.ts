@@ -16,35 +16,46 @@ export class HomeComponent {
 
   categories = [
     {
-      label: 'T-SHIRTS',
+      label: 'Shirts',
+      cat:'Shirts',
       image:  '../../../assets/Home-Images/section-2/img-1-TshirtW.jpg',
-      route: '/deals',
+      route: '/product/women',
     },
     {
       label: 'DENIM',
+      cat:'Jackets',
+
       image: '../../../assets/Home-Images/section-2/img-2-DENIM.jpg',
-      route: '/wheel',
+      route: '/product/men',
     },
     {
       label: 'DRESSES',
+      cat:'Vests',
+
       image: '../../../assets/Home-Images/section-2/img-3-Dress.jpg',
 
-      route: '/new',
+      route: '/product/women',
     },
     {
       label: 'JACKETS & VESTS',
+      cat:'Vests',
+
       image:     '../../../assets/Home-Images/section-2/img-4-Jacket.jpg',
-      route: '/jackets',
+      route: '/product/men',
     },
     {
       label: 'SWEATSHIRTS',
+      cat:'Jackets',
+
       image:     '../../../assets/Home-Images/section-2/img-5-sweatshirts.jpg',
-      route: '/tshirts',
+      route: '/product/kids',
     },
     {
       label: 'NEW ARRIVALS',
+      cat:'Jackets',
+
       image:     '../../../assets/Home-Images/section-2/img-6-NewArrival.jpg',
-      route: '/denim',
+      route: '/product/women',
     }
   ];
 
@@ -52,23 +63,23 @@ export class HomeComponent {
     {
       image: '../../../assets/Home-Images/section-3/img-1.webp',
 
-      route: '/seasonal'
+      route: '/product/women'
     },
     {
       image: '../../../assets/Home-Images/section-3/img-2.webp',
 
-      route: '/accessories'
+      route: '/product/women'
     },
     {
       image: '../../../assets/Home-Images/section-3/img-3.webp',
 
-      route: '/men'
+      route: '/product/women'
     },
     {
       image: '../../../assets/Home-Images/section-3/img-4.webp',
 
 
-      route: '/maternity'
+      route: '/product/kids'
     },
 
   ];
