@@ -12,12 +12,13 @@ import { TermTextPipe } from '../../shared/pipe/term-text.pipe';
 import { FormsModule } from '@angular/forms';
 import { CartserviceService } from '../../shared/service/cartservice.service';
 import { ToastrService } from 'ngx-toastr';
+import { LimitWordsPipe } from '../../shared/pipe/limit-words.pipe';
 
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule, FormsModule,SearchPipe , RouterLink],
+  imports: [CommonModule, FormsModule,SearchPipe , RouterLink,LimitWordsPipe],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -29,35 +30,27 @@ products:ProductInerface[]=[];
   subscribId!: Subscription;
   searchTerm:string='';
 
-  // ngOnInit(): void {
-  //   this.subscribId = this._ActivatedRoute.paramMap.subscribe(params => {
-  //     this.categoryName = params.get('name') || '';
-      
-  //     this._GetproductService.getAllProduct(this.categoryName).subscribe({
-  //       next: (response) => {
-  //         this.products = response
-  //         console.log(response);
-  //         ;
-  //       },
-  //       error: (err) => {
-  //         console.error('Error fetching products:', err);
-  //       }
-  //     });
-  //   });
-  // }
+
 
   ngOnInit(): void {
     this.subscribId = this._ActivatedRoute.paramMap.subscribe(params => {
       this.categoryName = params.get('name') || '';
       this.fetchProducts();
     });
+    this._ActivatedRoute.queryParams.subscribe(params => {
+      if (params['category']) {
+        this.selectedSubCategory = params['category'];
+        this.applyFilters();
+      }
+    });
+    
   }
 
   // Method to handle the sorting of products by price
   onSortChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
     const sortBy = target.value;
-  
+
     if (sortBy) {
       this._GetproductService.getProductSortedPrice(this.categoryName, sortBy).subscribe({
         next: (response) => {
@@ -71,8 +64,8 @@ products:ProductInerface[]=[];
       this.fetchProducts(); // بدون ترتيب
     }
   }
-  
-  
+
+
 
   // Fetch products with the default sorting (unsorted)
   fetchProducts(): void {
@@ -85,7 +78,7 @@ products:ProductInerface[]=[];
       }
     });
   }
-  
+
   cartDetails:any={};
   addCart(product: ProductInerface): void {
     this._CartserviceService.addToCart({
@@ -102,7 +95,7 @@ products:ProductInerface[]=[];
       // next: res => console.log(res),
       // error: err => console.log(err)
     // });
-  
+
     // this._CartserviceService.addToCart(productToSend).subscribe({
       next: (response) => {
         this.cartDetails = response;
@@ -157,6 +150,11 @@ getSortByValue(selected: string): string {
     default:
       return '';
   }
+}
+
+addToWishlist(item:ProductInerface)
+{
+
 }
 
 //   selectedColor: string = "";
