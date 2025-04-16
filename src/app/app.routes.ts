@@ -11,10 +11,18 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './component/home/home.component';
 import { NotFoundComponent } from './component/not-found/not-found.component';
 import { TestComponent } from './component/test/test.component';
+import { OrderAddressComponent } from './component/order-address/order-address.component';
+import { PaymentComponent } from './component/payment/payment.component';
+import { VisaComponent } from './component/visa/visa.component';
+import { CashComponent } from './component/cash/cash.component';
+import { ProfileComponent } from './component/profile/profile.component';
+import { PersonalInfoComponent } from './component/personal-info/personal-info.component';
+import { MyAddressComponent } from './component/my-address/my-address.component';
+import { MyOrdersComponent } from './component/my-orders/my-orders.component';
 
 export const routes: Routes = [
   {
-    
+
     path: '',
     // canActivate: [loginGuard],
     loadComponent: () =>
@@ -56,16 +64,49 @@ export const routes: Routes = [
         title: 'wishlist',
       },
       {
-        path: 'detials/:id',
+
+        path: 'order-address',
+        loadComponent: () =>
+          import('./component/order-address/order-address.component').then(
+            (m) => m.OrderAddressComponent
+          ),
+        title: 'order-address',
+      },
+      {
+
+        path:  'detials/:id',
         loadComponent: () =>
           import('./component/detials/detials.component').then(
             (m) => m.DetialsComponent
           ),
-        title: 'detials',
+        title: 'details',
       },
-  
+      {
+        path:'profile',
+        component:ProfileComponent,
+        children:
+        [
+          {path:'',pathMatch:'full',redirectTo:'personal-info'},
+          {path:'personal-info',component:PersonalInfoComponent},
+          {path:'my-address',component:MyAddressComponent},
+          {path:'my-orders',component:MyOrdersComponent}
+        ],
+       },
+     {
+      path:'payment',
+      component:PaymentComponent,
+      children:
+      [
+        {path:'',pathMatch:'full',redirectTo:'cash'},
+        {path:'cash',component:CashComponent},
+        {path:'visa',component:VisaComponent}
+      ],
+     }
+
+
     ],
   },
+
   {
     path: '',
     loadComponent: () =>
@@ -117,5 +158,5 @@ export const routes: Routes = [
       ),
     title: 'notFound',
   },
-  
+
 ];

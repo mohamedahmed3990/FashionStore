@@ -55,3 +55,31 @@ export interface IBasketTotals {
     subtotal: number;
     total: number;
 }
+
+export interface Productcart {
+  id: number
+  productName: string;
+  pictureUrl: string
+  color: string
+  size: string
+  category: string
+  price: number
+  quantity: number
+}
+
+
+
+
+export interface IOrderAddress{
+country:string,
+  city: string,
+  addressDetails: string
+}
+
+export interface IUserProfile {
+  email: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  userName: string;
+}
