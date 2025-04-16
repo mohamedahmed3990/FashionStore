@@ -1,4 +1,4 @@
-<div class="container my-4">
+<!-- <div class="container my-4">
   <h5 class="mb-3">1. Address Information</h5>
 
   <form (ngSubmit)="submit()" #addressForm="ngForm" class="card p-4">
@@ -52,4 +52,88 @@
       {{ message }}
     </div>
   </form>
+</div> -->
+
+<div class="container mt-5">
+  <div class="card shadow-sm border-0">
+    <div class="card-body">
+      <h4 class="card-title mb-4">
+        <i class="bi bi-geo-alt-fill text-primary"></i> My Address
+      </h4>
+
+      <div *ngIf="isLoading" class="text-center py-4">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!isLoading && !showForm" class="text-center">
+        <p class="text-muted">{{ statusMessage }}</p>
+        <button class="btn btn-primary mt-2" (click)="enableForm()">
+          <i class="bi bi-plus-circle me-1"></i> Add Address
+        </button>
+      </div>
+
+      <form *ngIf="showForm" (ngSubmit)="submit()" class="pt-3">
+        <div class="mb-3">
+          <label for="country" class="form-label">Country</label>
+          <input
+            type="text"
+            id="country"
+            class="form-control"
+            [(ngModel)]="address.country"
+            name="country"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="city" class="form-label">City</label>
+          <input
+            type="text"
+            id="city"
+            class="form-control"
+            [(ngModel)]="address.city"
+            name="city"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="addressDetails" class="form-label">Address Details</label>
+          <textarea
+            id="addressDetails"
+            rows="3"
+            class="form-control"
+            [(ngModel)]="address.addressDetails"
+            name="addressDetails"
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">
+          <i class="bi bi-save me-1"></i> Save Address
+        </button>
+      </form>
+
+      <div *ngIf="formMessage" class="alert alert-info mt-4">
+        {{ formMessage }}
+      </div>
+
+      <hr class="my-4" />
+      <div class="d-flex justify-content-end mt-4">
+        <button
+          class="btn btn-outline-primary btn-lg"
+          style="width: 25%;"
+          [disabled]="!addressExists"
+          (click)="goToNext()"
+        >
+          Next <i class="bi bi-arrow-right ms-1"></i>
+        </button>
+      </div>
+
+
+
+    </div>
+  </div>
 </div>

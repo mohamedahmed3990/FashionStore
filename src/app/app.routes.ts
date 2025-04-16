@@ -64,13 +64,22 @@ export const routes: Routes = [
         title: 'wishlist',
       },
       {
-       
+
         path: 'order-address',
         loadComponent: () =>
           import('./component/order-address/order-address.component').then(
             (m) => m.OrderAddressComponent
           ),
         title: 'order-address',
+      },
+      {
+
+        path:  'detials/:id',
+        loadComponent: () =>
+          import('./component/detials/detials.component').then(
+            (m) => m.DetialsComponent
+          ),
+        title: 'details',
       },
       {
         path:'profile',
@@ -137,14 +146,17 @@ export const routes: Routes = [
         title: 'register',
       },
     ],
+
+
   },
 
-      {
-        path: '**',
-        loadComponent: () =>
-          import('./component//not-found/not-found.component').then(
-            (m) => m.NotFoundComponent
-          ),
-        title: 'notFound',
-      },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./component//not-found/not-found.component').then(
+        (m) => m.NotFoundComponent
+      ),
+    title: 'notFound',
+  },
+
 ];
