@@ -1,85 +1,95 @@
-<section class="bg-main-light p-4 rounded my-3 mx-auto w-75">
-  <h1>Login Now</h1>
-  <form [formGroup]="loginForm" (ngSubmit)="getDataForm()">
-    <div class="mb-2">
-      <label for="email"> email:</label>
+<section class="login-card animated fadeIn shadow-lg p-5 rounded-4 my-5 mx-auto" style="max-width: 500px;">
+  <div class="text-center mb-4">
+    <i class="bi bi-person-circle fs-1 text-primary bounce-icon"></i>
+    <h2 class="fw-bold mt-2 fade-in-delay">Login</h2>
+    <p class="text-muted fade-in-delay-2">Access your account</p>
+  </div>
+
+  <form [formGroup]="loginForm" (ngSubmit)="getDataForm()" class="fade-in-delay-3">
+    <!-- Email -->
+    <div class="mb-3">
+      <label for="email" class="form-label">
+        <i class="bi bi-envelope me-1 text-primary icon-transition"></i>Email Address
+      </label>
       <input
         #inputEmail
         formControlName="email"
         type="email"
         id="email"
-        class="form-control"
+        class="form-control input-animated"
+        placeholder="Enter your email"
       />
       <div
-        class="alert alert-danger"
-        *ngIf="
-          loginForm.get('email')?.errors &&
-          (loginForm.get('email')?.touched || inputEmail.value.length > 0)
-        "
+        class="alert alert-danger mt-2 py-1 px-2"
+        *ngIf="loginForm.get('email')?.errors && (loginForm.get('email')?.touched || inputEmail.value.length > 0)"
       >
-        <p *ngIf="loginForm.get('email')?.getError('required')">
-          email is Required
-        </p>
-        <p *ngIf="loginForm.get('email')?.getError('email')">email in valid</p>
+        <p class="mb-0" *ngIf="loginForm.get('email')?.getError('required')">Email is required</p>
+        <p class="mb-0" *ngIf="loginForm.get('email')?.getError('email')">Invalid email format</p>
       </div>
     </div>
-    <div class="mb-2">
-      <label for="password"> password:</label>
+
+    <!-- Password -->
+    <div class="mb-3">
+      <label for="password" class="form-label">
+        <i class="bi bi-lock-fill me-1 text-primary icon-transition"></i>Password
+      </label>
       <input
         #inputPassword
         formControlName="password"
         type="password"
         id="password"
-        class="form-control"
+        class="form-control input-animated"
+        placeholder="Enter your password"
       />
       <div
-        class="alert alert-danger"
-        *ngIf="
-          loginForm.get('password')?.errors &&
-          (loginForm.get('password')?.touched || inputPassword.value.length > 0)
-        "
+        class="alert alert-danger mt-2 py-1 px-2"
+        *ngIf="loginForm.get('password')?.errors && (loginForm.get('password')?.touched || inputPassword.value.length > 0)"
       >
-        <p *ngIf="loginForm.get('password')?.getError('required')">
-          password is Required
-        </p>
-        <p *ngIf="loginForm.get('password')?.getError('pattern')">
+        <p class="mb-0" *ngIf="loginForm.get('password')?.getError('required')">Password is required</p>
+        <p class="mb-0" *ngIf="loginForm.get('password')?.getError('pattern')">
           Password must contain:<br />
-          - Minimum 6 characters<br />
+          - At least 6 characters<br />
           - One uppercase letter<br />
           - One lowercase letter<br />
           - One number<br />
-          - One special character<br />
+          - One special character
         </p>
       </div>
     </div>
-    <label>
+
+    <!-- Remember Me -->
+    <div class="form-check mb-3">
       <input
         type="checkbox"
+        class="form-check-input"
+        id="rememberMe"
         [ngModelOptions]="{ standalone: true }"
         [(ngModel)]="rememberMe"
       />
-      Remember Me
-    </label>
-
-    <div>
-      <span>
-        Not signed up yet
-        <a class="col cursor-pointer" [routerLink]="'/register'"
-          >Create account</a
-        ></span
-      >
-    </div>
-    <div>
-      <a class="col cursor-pointer" [routerLink]="'/forget'"
-        >Forget Password ?</a
-      >
+      <label class="form-check-label" for="rememberMe">
+        <i class="bi bi-bookmark-check me-1 text-primary"></i>Remember Me
+      </label>
     </div>
 
-    <button class="btn-main ms-auto d-block">
-      <i *ngIf="isLoding" class="fas fa-spin fa-spinner"></i>
-      Login
+    <!-- Links -->
+    <div class="d-flex justify-content-between mb-4">
+      <a [routerLink]="'/register'" class="text-decoration-none">
+        <i class="bi bi-person-plus me-1"></i> Create Account
+      </a>
+      <a [routerLink]="'/forget'" class="text-decoration-none">
+        <i class="bi bi-question-circle me-1"></i> Forgot Password?
+      </a>
+    </div>
+
+    <!-- Submit Button -->
+    <button class="btn btn-primary w-100 btn-animated">
+      <i *ngIf="isLoding" class="fas fa-spin fa-spinner me-2"></i>
+      <i class="bi bi-box-arrow-in-right me-1"></i> Login
     </button>
 
-    <p *ngIf="msgError" class="alert alert-danger">{{ msgError }}</p>
+    <!-- Error Message -->
+    <p *ngIf="msgError" class="alert alert-danger text-center mt-3">
+      <i class="bi bi-exclamation-triangle me-2"></i>{{ msgError }}
+    </p>
   </form>
 </section>
