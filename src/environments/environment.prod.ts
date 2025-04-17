@@ -1,4 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   apiUrl: 'https://localhost:7041'  // Local development URL
+  // paymobIframeId: "911500"
 };
