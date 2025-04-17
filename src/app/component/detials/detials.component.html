@@ -11,7 +11,7 @@
       <div class="col-lg-6 col-md-12">
         <h2 class="fw-bold">{{ productDetials.productName }}</h2>
         <hr>
-        
+
         <!-- السعر -->
         <p class="text-muted mb-1">Cash Price</p>
         <p class="h5 fw-semibold text-success" *ngFor="let item of productDetials.productVariants">
@@ -22,7 +22,7 @@
         <div class="mt-4">
           <h6 class="text-muted">Size</h6>
           <div class="d-flex flex-wrap gap-2">
-            <button 
+            <button
               *ngFor="let size of sizes"
               class="btn"
               [ngClass]="{'btn-dark': selectedSize?.name === size.name, 'btn-outline-secondary': selectedSize?.name !== size.name}"
@@ -37,7 +37,7 @@
           <h6 class="text-muted">Color</h6>
           <div class="d-flex flex-wrap gap-3">
             <div *ngFor="let color of colors" class="text-center">
-              <button 
+              <button
                 class="btn p-2 border rounded-circle"
                 [ngClass]="{'border-dark': selectedColor?.id === color.id}"
                 (click)="selectColor(color)"
@@ -96,7 +96,12 @@
       </div>
       <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let item of products">
         <div class="card h-100 shadow-sm border-0">
-          <img [src]="item.productPicture" [alt]="item.productName" class="card-img-top" height="200" style="object-fit: cover;">
+          <img
+          [src]="item.productPicture"
+          [alt]="item.productName"
+          class="card-img-top rounded-top"
+          style="height: 250px; object-fit: contain; background-color: #f8f9fa"
+        />
           <div class="card-body d-flex flex-column justify-content-between">
             <h6 class="fw-bold">{{ item.productName }}</h6>
             <p class="text-muted small">{{ item.description }}</p>

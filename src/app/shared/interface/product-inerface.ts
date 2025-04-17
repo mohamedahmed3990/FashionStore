@@ -83,3 +83,10 @@ export interface IUserProfile {
   phoneNumber: string;
   userName: string;
 }
+
+export interface IWishlistItem {
+  id: number;
+  name: string;
+  price: number;
+  image: string; 
+}

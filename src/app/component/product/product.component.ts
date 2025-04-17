@@ -1,9 +1,9 @@
 
 import { myhttpInterceptor } from './../../shared/interceptor/myhttp.interceptor';
 import { SearchPipe } from './../../shared/pipe/search.pipe';
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, inject, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { GetproductService } from '../../shared/service/getproduct.service';
-import {  ProductInerface } from '../../shared/interface/product-inerface';
+import {  IWishlistItem, ProductInerface } from '../../shared/interface/product-inerface';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Pipe, PipeTransform } from '@angular/core';
@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { CartserviceService } from '../../shared/service/cartservice.service';
 import { ToastrService } from 'ngx-toastr';
 import { LimitWordsPipe } from '../../shared/pipe/limit-words.pipe';
+import { WishlistService } from '../../shared/service/wishlist.service';
 
 
 @Component({
@@ -23,8 +24,10 @@ import { LimitWordsPipe } from '../../shared/pipe/limit-words.pipe';
   styleUrl: './product.component.css'
 })
 export class ProductComponent implements  OnInit , OnDestroy {
-constructor(private _GetproductService:GetproductService , private _ActivatedRoute:ActivatedRoute,private _CartserviceService:CartserviceService,private _ToastrService:ToastrService ){}
+constructor(private _GetproductService:GetproductService , private _ActivatedRoute:ActivatedRoute,private _CartserviceService:CartserviceService,private _ToastrService:ToastrService,private _WishlistService:WishlistService ){}
 products:ProductInerface[]=[];
+
+
 
   categoryName: string = '';
   subscribId!: Subscription;
@@ -37,14 +40,22 @@ products:ProductInerface[]=[];
       this.categoryName = params.get('name') || '';
       this.fetchProducts();
     });
+
+
     this._ActivatedRoute.queryParams.subscribe(params => {
       if (params['category']) {
         this.selectedSubCategory = params['category'];
         this.applyFilters();
       }
     });
-    
+
+
+
+
   }
+
+
+
 
   // Method to handle the sorting of products by price
   onSortChange(event: Event): void {
@@ -152,27 +163,35 @@ getSortByValue(selected: string): string {
   }
 }
 
-addToWishlist(item:ProductInerface)
-{
+addToWishlist(item: IWishlistItem): void {
+  let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
 
+  if (!wishlist.find((p: IWishlistItem) => p.id === item.id)) {
+    wishlist.push(item);
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));  // Save wishlist to localStorage
+  }
 }
 
-//   selectedColor: string = "";
-// selectedSize: string = "";
-// selectedSubCategory: string = "";
 
-// applyFilters(): void {
-//   const color = this.selectedColor || "";
-//   const size = this.selectedSize || "";
-//   const subCategory = this.selectedSubCategory || "";
 
-//   this._GetproductService.getProducfilter(this.categoryName,color, size, subCategory).subscribe({
-//     next: (response) => {
-//       this.products = response;
-//     },
-//     error: (err) => {
-//       console.error('Error:', err);
-//     }
-//   });
-// }
+hasWishlistItems = false;
+public wishlistService = inject(WishlistService);  // Inject the WishlistService
+
+toggleWishlist(product: ProductInerface): void {
+  // Map ProductInerface to IWishlistItem
+  const wishlistItem: IWishlistItem = {
+    id: product.productId,
+    name: product.productName,
+    price: product.productVariants[0]?.price, // Assuming price comes from productVariants
+    image: product.productPicture
+  };
+
+  if (this.wishlistService.isInWishlist(product.productId)) {
+    this.wishlistService.removeFromWishlist(product.productId);
+  } else {
+    this.wishlistService.addToWishlist(wishlistItem);
+  }
+}
+
+
 }
