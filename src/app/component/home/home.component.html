@@ -1,18 +1,17 @@
-<!-- Section 1 -->
 <section class="px-5 mt-5">
-  <div class="row" style="height: 30vh">
+  <div class="row" style="height: 30vh;">
     <!-- Carousel -->
     <section class="col-9">
-      <div id="carouselExampleCaptions" class="carousel slide h-100">
-        <div class="carousel-inner h-100">
-          <div class="carousel-item active h-100">
-            <a [routerLink]="'/test'">
+      <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+
               <img
                 src="./assets/Home-Images/slider-img-1.jpg"
                 class="d-block w-100 h-100 object-fit-cover"
                 alt="..."
               />
-            </a>
+          
             <div class="carousel-caption d-none d-md-block">
               <a routerLink="/product/women">
                 <button class="btn btn-light col-2 me-5">Women</button>
@@ -22,7 +21,7 @@
               </a>
             </div>
           </div>
-          <div class="carousel-item h-100">
+          <div class="carousel-item">
             <a routerLink="/product/men">
               <img
                 src="../../../assets/Home-Images/slider-img-2.jpg"
@@ -31,7 +30,7 @@
               />
             </a>
           </div>
-          <div class="carousel-item h-100">
+          <div class="carousel-item">
             <a routerLink="/product/women">
               <img
                 src="../../../assets/Home-Images/slider-img-3.jpg"
@@ -41,26 +40,18 @@
             </a>
           </div>
         </div>
-        <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="prev"
-        >
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="next"
-        >
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
       </div>
     </section>
+
 
     <!-- Right Images -->
     <section class="col-3">
@@ -86,9 +77,12 @@
   </div>
 </section>
 
+
+
 <!-- Section 2 -->
-<section class="section-2">
-  <div class="container py-5">
+
+<section class="section-2 py-5 " style="margin-top: 30vh;">
+  <div class="container">
     <div class="row justify-content-center text-center g-4">
       <div
         class="col-6 col-sm-4 col-md-2"
@@ -116,24 +110,26 @@
   </div>
 </section>
 
+
+<!-- Section 3 -->
 <!-- Section 3 -->
 <section class="py-5">
   <div class="container">
     <div class="row g-3">
       <div class="col-md-6" *ngFor="let banner of banners">
-        <div class="position-relative">
-          <a [routerLink]="banner.route" class="btn btn-light mt-2">
-            <img
-              [src]="banner.image"
-              class="img-fluid w-100"
-              alt="banner image"
-            />
-          </a>
-        </div>
+        <a [routerLink]="banner.route" class="btn btn-light mt-2">
+          <img
+            [src]="banner.image"
+            class="img-fluid w-100"
+            alt="banner image"
+          />
+        </a>
       </div>
     </div>
   </div>
 </section>
+
+
 
 <!-- Section 4 -->
 <section class="py-4 bg-light">
@@ -148,3 +144,4 @@
     </div>
   </div>
 </section>
+
