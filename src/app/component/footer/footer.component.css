@@ -1,0 +1,27 @@
+footer a {
+    color: #6c757d;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  footer a:hover {
+    color: #007bff;
+  }
+
+  footer i {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+  }
+
+  footer i:hover {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+
+  .payment-icons img {
+    transition: transform 0.3s ease;
+  }
+
+  .payment-icons img:hover {
+    transform: scale(1.05);
+  }
