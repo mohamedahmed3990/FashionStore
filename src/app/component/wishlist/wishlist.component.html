@@ -1,1 +1,15 @@
-<p>wishlist works!</p>
+<!-- src/app/components/wishlist/wishlist.component.html -->
+<div *ngIf="wishlistItems.length > 0; else emptyWishlist">
+  <div *ngFor="let item of wishlistItems" class="wishlist-item">
+    <img [src]="item.image" alt="{{item.name}}" class="wishlist-item-image" />
+    <div class="wishlist-item-details">
+      <h3>{{item.name}}</h3>
+      <p>{{item.price | currency : 'EGP'}}</p>
+      <button (click)="removeItem(item.id)">Remove</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #emptyWishlist>
+  <p>Your wishlist is empty. Start adding products!</p>
+</ng-template>

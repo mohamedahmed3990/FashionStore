@@ -1,14 +1,16 @@
 import { CommonModule, NgClass, NgComponentOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { FooterComponent } from "../footer/footer.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     RouterLink,
-    CommonModule
-  ],
+    CommonModule,
+    FooterComponent
+],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

@@ -19,6 +19,10 @@ import { ProfileComponent } from './component/profile/profile.component';
 import { PersonalInfoComponent } from './component/personal-info/personal-info.component';
 import { MyAddressComponent } from './component/my-address/my-address.component';
 import { MyOrdersComponent } from './component/my-orders/my-orders.component';
+import { ReturnsComponent } from './component/returns/returns.component';
+import { ShippingComponent } from './component/shipping/shipping.component';
+import { TermofuseComponent } from './component/termofuse/termofuse.component';
+import { DataprivacyComponent } from './component/dataprivacy/dataprivacy.component';
 
 export const routes: Routes = [
   {
@@ -101,6 +105,9 @@ export const routes: Routes = [
         {path:'cash',component:CashComponent},
         {path:'visa',component:VisaComponent}
       ],
+     },
+     {
+      path:'wishlist',component:WishlistComponent
      }
 
 
@@ -149,6 +156,22 @@ export const routes: Routes = [
 
 
   },
+  {
+    path:'returns',component:ReturnsComponent,
+  },
+  {
+    path:'shipping',component:ShippingComponent,
+
+  },
+  {
+    path:'termofuse',component:TermofuseComponent,
+
+  },
+  {
+    path:'dataprivacy',component:DataprivacyComponent,
+
+  },
+
 
   {
     path: '**',
