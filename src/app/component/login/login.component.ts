@@ -8,7 +8,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -28,7 +28,8 @@ export class LoginComponent {
   constructor(
     private _AuthService: AuthService,
     private _Router: Router,
-    private _FormBuilder: FormBuilder
+    private _FormBuilder: FormBuilder,
+    private http: HttpClient
   ) {}
   msgError: string = '';
   isLoding: boolean = false;
@@ -58,15 +59,38 @@ export class LoginComponent {
         next: (response) => {
           if (response.message == 'success') {
             this.isLoding = false;
-
+  
+            const token = response.token;
+  
+            // ✅ حفظ التوكن
             if (this.rememberMe) {
-              localStorage.setItem('eToken', response.token);
+              localStorage.setItem('eToken', token);
             } else {
-              sessionStorage.setItem('eToken', response.token);
+              sessionStorage.setItem('eToken', token);
             }
-
+  
+            // ✅ حفظ بيانات المستخدم
             this._AuthService.savrUserData();
-
+  
+            // ✅ ✅ Migrate Basket from guest to logged-in user
+            const guestId = localStorage.getItem('guest_basket_id');
+            if (guestId) {
+              const headers = new HttpHeaders({
+                Authorization: `Bearer ${token}` 
+              });
+  
+              this.http.post(`https://localhost:7041/Basket/migrate/${guestId}`, {}, { headers }).subscribe({
+                next: () => {
+                  localStorage.removeItem('guest_basket_id');
+                },
+                error: (err) => {
+                  console.error('Error migrating basket:', err);
+                }
+              });
+              
+            }
+  
+            // ✅ توجيه المستخدم للصفحة الرئيسية أو اللي بعدها
             this._Router.navigate(['/home']);
           }
         },
@@ -79,4 +103,5 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched();
     }
   }
+  
 }

@@ -29,10 +29,12 @@ export interface Size {
 
 
 export interface IBasket {
-    id: string;
-    items: IBasketItem[];
-
+  id: string;
+  items: IBasketItem[];
+  paymentIntentId?: string;   // ✅ أضف دول
+  clientSecret?: string;
 }
+
 
 export interface IBasketItem {
     id: number;
