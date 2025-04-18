@@ -14,6 +14,8 @@ export class CartItemComponent{
   @Output() quantityChanged = new EventEmitter<{id: string, quantity: number}>();
   constructor(private cartService: CartService) {}
   get totalPrice(): number {
+    console.log(this.cart);
+    
     return this.cart.price * this.cart.quantity;
   }
   decrease(): void {

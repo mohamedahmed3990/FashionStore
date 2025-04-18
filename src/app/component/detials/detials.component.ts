@@ -147,7 +147,7 @@ export class DetialsComponent {
 
     this._CartserviceService.getAllProducts().subscribe({
       next: (existingBasket: any) => {
-        const currentItems = existingBasket?.cartItems || [];
+        const currentItems = existingBasket?.items || [];
 
         const existingItem = currentItems.find((item: any) => item.id === selectedVariant.id);
 
@@ -169,8 +169,6 @@ export class DetialsComponent {
         const updatedBasket: IBasket = {
           id: basketId,
           items: currentItems,
-          paymentIntentId: '',
-          clientSecret: ''
         };
 
         this._CartserviceService.addProductToCart(updatedBasket).subscribe({

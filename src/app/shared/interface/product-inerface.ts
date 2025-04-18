@@ -31,20 +31,17 @@ export interface Size {
 export interface IBasket {
   id: string;
   items: IBasketItem[];
-  paymentIntentId?: string;   // ✅ أضف دول
-  clientSecret?: string;
 }
 
-
 export interface IBasketItem {
-    id: number;
-    productName: string;
-    price: number;
-    quantity: number;
-    pictureUrl: string;
-    size: string;
-    category: string;
-    color:string;
+  id: number;
+  productName: string;
+  price: number;
+  quantity: number;
+  pictureUrl: string;
+  size: string;
+  color: string;
+  category: string;
 }
 
 export class Basket implements IBasket {

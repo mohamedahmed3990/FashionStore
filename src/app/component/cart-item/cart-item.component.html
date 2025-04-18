@@ -1,9 +1,10 @@
-<div class="cart-item">
-  <div class="cart-item-image" [ngStyle]="{'background-image': 'url(' + cart.image + ')'}"></div>
-
+<div 
+  class="cart-item-image" 
+  [ngStyle]="{'background-image': 'url( cart.pictureUrl )'}">
+</div>
   <div class="cart-item-details">
     <div class="cart-item-name">
-      <h5 class="item-title">{{cart.Name}}</h5>
+      <h5 class="item-title">{{cart.productName}}</h5>
       <button (click)="removeItem()" class="btn-remove" aria-label="Remove item">
         <i class="fa-solid fa-xmark"></i>
       </button>
@@ -34,4 +35,3 @@
       </div>
     </div>
   </div>
-</div>
