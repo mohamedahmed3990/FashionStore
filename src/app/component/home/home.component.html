@@ -1,47 +1,61 @@
-
-<!-- section 1  -->
-
-<section class="px-5 d-flex">
-  <div class="row" style="height: 30vh;">
+<!-- Section 1 -->
+<section class="px-5 mt-5">
+  <div class="row" style="height: 30vh">
     <!-- Carousel -->
     <section class="col-9">
       <div id="carouselExampleCaptions" class="carousel slide h-100">
         <div class="carousel-inner h-100">
           <div class="carousel-item active h-100">
             <a [routerLink]="'/test'">
-            <img src="./assets/Home-Images/slider-img-1.jpg" class="d-block w-100 h-100 object-fit-cover" alt="...">
-          </a>
+              <img
+                src="./assets/Home-Images/slider-img-1.jpg"
+                class="d-block w-100 h-100 object-fit-cover"
+                alt="..."
+              />
+            </a>
             <div class="carousel-caption d-none d-md-block">
               <a routerLink="/product/women">
-              <button class="btn btn-light col-2 me-5">Women</button>
-            </a>
+                <button class="btn btn-light col-2 me-5">Women</button>
+              </a>
               <a routerLink="/product/men">
-              <button class="btn btn-light col-2">Men</button>
+                <button class="btn btn-light col-2">Men</button>
+              </a>
+            </div>
+          </div>
+          <div class="carousel-item h-100">
+            <a routerLink="/product/men">
+              <img
+                src="../../../assets/Home-Images/slider-img-2.jpg"
+                class="d-block w-100 h-100 object-fit-cover"
+                alt="..."
+              />
             </a>
-            </div>
           </div>
           <div class="carousel-item h-100">
-            <a [routerLink]="'/menproduct'">
-            <img src="../../../assets/Home-Images/slider-img-2.jpg" class="d-block w-100 h-100 object-fit-cover" alt="...">
-          </a>
-            <div class="carousel-caption d-none d-md-block">
-
-            </div>
-          </div>
-          <div class="carousel-item h-100">
-            <a [routerLink]="'/womenproduct'">
-            <img src="../../../assets/Home-Images/slider-img-3.jpg" class="d-block w-100 h-100 object-fit-cover" alt="...">
-          </a>
-            <div class="carousel-caption d-none d-md-block">
-
-            </div>
+            <a routerLink="/product/women">
+              <img
+                src="../../../assets/Home-Images/slider-img-3.jpg"
+                class="d-block w-100 h-100 object-fit-cover"
+                alt="..."
+              />
+            </a>
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="prev"
+        >
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="next"
+        >
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
@@ -51,85 +65,86 @@
     <!-- Right Images -->
     <section class="col-3">
       <div class="h-50 pb-2">
-        <a [routerLink]="'/sale'">
-        <img src="../../../assets/Home-Images/sale-1.jpg" class="w-100 h-100 object-fit-cover" alt="">
-      </a>
+        <a routerLink="/product/women">
+          <img
+            src="../../../assets/Home-Images/sale-1.jpg"
+            class="w-100 h-100 object-fit-cover"
+            alt=""
+          />
+        </a>
       </div>
       <div class="h-50 pt-2">
-        <a [routerLink]="'/sale'">
-
-        <img src="../../../assets/Home-Images/sale-2.jpg" class="w-100 h-100 object-fit-cover" alt="">
-      </a>
+        <a routerLink="/product/Kids">
+          <img
+            src="../../../assets/Home-Images/sale-2.jpg"
+            class="w-100 h-100 object-fit-cover"
+            alt=""
+          />
+        </a>
       </div>
-    </section>
-
-
-<!-- Section 2 -->
-    <section class="section-2">
-      <div class="container py-5">
-        <div class="row justify-content-center text-center g-4">
-          <div class="col-6 col-sm-4 col-md-2" *ngFor="let category of categories">
-<a [routerLink]="category.route" class="text-decoration-none text-dark">
-              <div class="rounded-circle overflow-hidden mx-auto mb-2" style="width: 100px; height: 100px;">
-<div >
-  <img [src]="category.image" alt="{{category.label}}" class="w-100 h-100 object-fit-cover">
-</div>
-              </div>
-              <p class="fw-bold small text-uppercase">{{ category.label }}</p>
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-
-
-<!-- Section 3  -->
-    <section>
-      <section class="py-5">
-        <div class="container">
-          <div class="row g-3">
-            <div class="col-md-6" *ngFor="let banner of banners">
-              <div class="position-relative">
-                <a
-                   [routerLink]="banner.route"
-                   class="btn btn-light mt-2">
-                <img [src]="banner.image" class="img-fluid w-100" alt="banner image" />
-
-
-
-                  </a>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </section>
-
-
-<!-- Section 4 -->
-    <section>
-      <section class="py-4 bg-light ">
-        <div class="container d-flex ">
-          <div class="row text-center g-3 justify-content-between">
-            <div class="col-12 col-sm-6 col-md-3  " *ngFor="let feature of features">
-
-                <img [src]="feature.icon"  class="p-5">
-
-
-            </div>
-          </div>
-        </div>
-      </section>
-
     </section>
   </div>
-
 </section>
 
+<!-- Section 2 -->
+<section class="section-2">
+  <div class="container py-5">
+    <div class="row justify-content-center text-center g-4">
+      <div
+        class="col-6 col-sm-4 col-md-2"
+        *ngFor="let category of categories"
+      >
+        <a
+          [routerLink]="category.route"
+          [queryParams]="{ category: category.cat }"
+          class="text-decoration-none text-dark"
+        >
+          <div
+            class="rounded-circle overflow-hidden mx-auto mb-2"
+            style="width: 100px; height: 100px"
+          >
+            <img
+              [src]="category.image"
+              alt="{{ category.label }}"
+              class="w-100 h-100 object-fit-cover"
+            />
+          </div>
+          <p class="fw-bold small text-uppercase">{{ category.label }}</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- Section 3 -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-3">
+      <div class="col-md-6" *ngFor="let banner of banners">
+        <div class="position-relative">
+          <a [routerLink]="banner.route" class="btn btn-light mt-2">
+            <img
+              [src]="banner.image"
+              class="img-fluid w-100"
+              alt="banner image"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-
-
+<!-- Section 4 -->
+<section class="py-4 bg-light">
+  <div class="container">
+    <div class="row text-center g-3 justify-content-between">
+      <div
+        class="col-12 col-sm-6 col-md-3"
+        *ngFor="let feature of features"
+      >
+        <img [src]="feature.icon" class="p-5" />
+      </div>
+    </div>
+  </div>
+</section>

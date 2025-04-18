@@ -1,34 +1,116 @@
-<section class=" pt-5 bg-main-light p-3 rounded-3 m-4">
-    <div class="co-md-8">
-        <h1>Shop Cart</h1>
-        <p class="text-main">
-            total price: {{cartDetails.totalCartPrice | currency :"EGP"}}
-        </p>
-        <div class="row border-bottom pb-2" *ngFor=" let item of cartDetails.products    ">
-             <div class="col-md-1">
-                <img [src]=" item.product.PictureUrl " class="w-100" alt="">
-             </div>
-             <div class="col-md-11">
-                 <div class="d-flex justify-content-between align-items-center "  >
-                     detailes
-                 <div>
-                    <h3 class="h5"> {{item.product.ProudectName}} </h3>
-                    <p class="text-main m-0"> Price:{{item.price}}</p>
-                     <button  (click)="removeCartItem(item.product._id)"  class="btn p-0 m-0">
-                       <i class="fa-regular fa-trash-can"></i> Remove
-                    </button> 
-                  </div>
-                   
-                  <div class=" mx-auto " >
-                    <button (click)="changeCount(item.product._id , item.count + 1)"  class="btn border border-success">+</button>
-                    <span> {{ item.Quantatity }} </span>
-                    <button  (click)="changeCount(item.product._id , item.count -1)"  class="btn border border-success">-</button>
-                  </div>   
-                 </div>   
-             </div>
-        </div></div> 
-         <div class="col-md-4"> 
-            <button routerLink=""  class="btn-main"> Online Payment
-            </button>
-          </div> 
- </section> 
+<div class="container-fluid">
+  <!-- حالة التحميل -->
+  <div *ngIf="loading" class="row my-5">
+    <div class="col-12 text-center py-5">
+      <div class="spinner-border text-teal-green" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p class="mt-3 text-muted">Loading your cart...</p>
+    </div>
+  </div>
+
+  <!-- الكارت فاضي -->
+  <div *ngIf="!loading && (Carts.length === 0 || !Carts)" class="row my-5 justify-content-center">
+    <div class="col-lg-5 col-md-7 col-sm-10 text-center py-5">
+      <div class="empty-cart-icon mb-4">
+        <i class="fa-solid fa-shopping-cart fa-4x"></i>
+      </div>
+      <h4 class="fw-bold">Your cart is empty</h4>
+      <p class="text-muted mb-4">Looks like you haven't added anything yet. Start shopping now!</p>
+      <a class="btn btn-primary btn-lg px-4" [routerLink]="['/products']">
+        Shop Now <i class="fa-solid fa-arrow-right ms-2"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- الكارت فيه منتجات -->
+  <div *ngIf="!loading && Carts.length > 0" class="container-fluid mt-2">
+    <div class="col-md-12 col-sm-12">
+      <h3 class=" mt-3">Shopping Bag</h3>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12">
+        <div class="cart-summary d-flex justify-content-between align-items-center">
+          <p class="items-count">{{Carts.length}} items in your cart</p>
+          <button class="btn-clear" (click)="openConfirmDialog()">
+            <i class="fa-solid fa-trash-can me-2"></i>Clear Cart
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Cart Items Section -->
+      <div class="col-lg-8 col-md-7 mb-4">
+        <div class="cart-items-container">
+          <ng-container *ngIf="isArray(Carts) && Carts.length > 0; else emptyCart">
+            <div *ngFor="let cart of Carts; trackBy: trackByCart">
+              <app-cart-item
+                [cart]="cart"
+                (itemRemoved)="handleItemRemoved($event)"
+                (quantityChanged)="updateItemQuantity($event)">
+              </app-cart-item>
+            </div>
+          </ng-container>
+          <ng-template #emptyCart>
+            <p class="empty-cart-msg">Your shopping bag is empty</p>
+          </ng-template>
+        </div>
+      </div>
+
+      <!-- Cart Summary Section -->
+      <div class="col-lg-4 col-md-5">
+        <div class="cart-summary-card">
+          <h5 class="summary-title mb-4">Order Summary</h5>
+
+          <div class="summary-row">
+            <span>Cart subtotal</span>
+            <span>{{ calculateTotalFromItems() | currency:' ':'symbol':'1.2-2' }} EGP</span>
+          </div>
+
+          <div class="summary-row">
+            <span>Discount</span>
+            <span class="discount">-4.00 EGP</span>
+          </div>
+
+          <div class="summary-row mb-3">
+            <span>Delivery Charge</span>
+            <span class="free-delivery">Free</span>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-total">
+            <strong>Total Amount</strong>
+            <strong>{{ (calculateTotalFromItems()-4) | currency:' ':'symbol':'1.2-2' }} EGP</strong>
+          </div>
+
+          <button class="btn-checkout" [routerLink]="['/checkout']">
+            <i class="fa-solid fa-lock me-2"></i>Proceed to Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Delete Modal -->
+<div class="modal-backdrop fade show" *ngIf="showConfirmDialog"></div>
+<div class="modal fade show d-block" tabindex="-1" role="dialog" *ngIf="showConfirmDialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content p-2">
+      <div class="modal-header pb-2">
+        <h5 class="modal-title">Confirm Clear Cart</h5>
+        <button type="button" class="btn-close" (click)="closeConfirmDialog()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-3">
+        Are you sure you want to remove all items from your cart?
+      </div>
+      <div class="modal-footer pt-2">
+        <button type="button" class="btn btn-secondary p-2 me-2" (click)="closeConfirmDialog()">Cancel</button>
+        <button type="button" class="btn btn-danger p-2" (click)="confirmClearCart()">Clear Cart</button>
+      </div>
+    </div>
+  </div>
+</div>

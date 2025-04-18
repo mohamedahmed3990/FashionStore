@@ -1,0 +1,33 @@
+
+  <!-- Tabs -->
+  <div class="d-flex border-bottom mt-2">
+    <a
+      class="flex-fill text-center py-2 text-decoration-none"
+      [routerLink]="['personal-info']"
+      routerLinkActive="active-tab"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+    <i class="bi bi-person-circle"></i>Personal Information
+    </a>
+    <a
+      class="flex-fill text-center py-2 text-decoration-none text-muted"
+      [routerLink]="['my-address']"
+      routerLinkActive="active-tab"
+    >
+    <i class="bi bi-geo-alt-fill"></i>My Address
+    </a>
+    <a
+    class="flex-fill text-center py-2 text-decoration-none text-muted"
+    [routerLink]="['my-orders']"
+    routerLinkActive="active-tab"
+  >
+  <i class="bi bi-list-ul"></i>My Orders
+  </a>
+  </div>
+
+  <!-- Child Route Content -->
+  <div class="mt-3">
+    <router-outlet></router-outlet>
+  </div>
+
+

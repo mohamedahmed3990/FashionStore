@@ -1,149 +1,141 @@
-<!-- <section class="my-4">
-    <h2 class="d-flex justify-content-center">Popular Prodects</h2>
-    <div class="row g-4">
-        <div class="col-md-3" *ngFor="let item of products.slice(0,12) |search:' ' ">
-            <div class="product " >
-               <!-- <div class=" p-2 cursor-pointer" [routerLink]="['/details',item._id]"> -->
-                <!-- <div class=" p-2 cursor-pointer">
-                <! <img [src]="item.imageCover" class="w-100" [alt]="item.title"> --> 
-                <!-- <img  height="200"[src]="item.image_url" class="w-100" [alt]="item.title"> -->
-                <!-- <h3 class="h6">{{item.category.name}}</h3> -->
-                <!-- <h3 class="h6">{{item.publisher}}</h3>
-                <h4 class="h6">{{item.title |termText :2}}</h4> --> 
-                <!-- <div class="d-flex align-items-center justify-content-between">
-                    <! <span>{{item.price |currency:'EGP' }}</span> -->
-                    <!-- <div><i class="fas fa-star rating-color"></i>
-                    <span class="text-muted">{{item.ratingsAverage}}</span> -->
+<section class="container-fluid my-5">
+  <h3 class="text-center fw-semibold text-primary mb-4">Popular Products</h3>
 
-                <!-- </div> -->
-                <!-- </div>  -->
-               <!-- </div>
-                <button class="btn-main w-100">Add Product</button> -->
-            <!-- </div> -->
-        <!-- </div> -->
-    <!-- </div> -->
-<!-- </section> --> 
+  <h2 class="fw-bold text-dark mb-2">{{ categoryName }}</h2>
+  <!-- Search Box -->
+  <div class="d-flex justify-content-center mb-4">
+    <input
+    type="search"
+    class="form-control w-50 rounded-pill shadow-sm px-4"
+    placeholder="Search for products..."
+    [(ngModel)]="searchTerm"
+    />
+  </div>
 
-<!-- <section class="my-4">
- 
-    <h2 class="d-flex justify-content-center">Popular Products</h2>
-    <input type="search" class="form-control w-50 mx-auto my-3" placeholder="Search....." [(ngModel)]="searchTerm"/> 
-    <h2 class="">{{categoryName}}</h2>
-   <div class="row g-4" *ngIf="products.length > 0">
-      <div class="col-md-3" *ngFor="let item of products | search:searchTerm ">
-        <div class="product">
-          <div class="p-2 cursor-pointer">
-            <img height="200" [src]="item.productPicture" class="w-100" [alt]="item.productName" />
-            <h3 class="h6">{{ item.productName }}</h3>
-            <h4 class="h6">{{ item.description  }}</h4>
-          </div>
-          <button class="btn-main w-100">Add Product</button>
+
+  <div class="row">
+    <!-- Filter Sidebar -->
+    <div class="col-md-3 mb-4">
+      <div class="card shadow-sm p-4 bg-white rounded-4 border border-light-subtle">
+        <h5 class="fw-bold text-secondary mb-4">Filters</h5>
+
+        <!-- Size Filter -->
+        <div class="mb-3">
+          <label class="form-label text-muted">Size</label>
+          <select class="form-select rounded-pill" [(ngModel)]="selectedSize" (change)="applyFilters()">
+            <option value="">All</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+          </select>
+        </div>
+
+        <!-- Color Filter -->
+        <div class="mb-3">
+          <label class="form-label text-muted">Color</label>
+          <select class="form-select rounded-pill" [(ngModel)]="selectedColor" (change)="applyFilters()">
+            <option value="">All</option>
+            <option value="Red">Red</option>
+            <option value="Black">Black</option>
+            <option value="White">White</option>
+          </select>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="mb-3">
+          <label class="form-label text-muted">Category</label>
+          <select class="form-select rounded-pill" [(ngModel)]="selectedSubCategory" (change)="applyFilters()">
+            <option value="">All</option>
+            <option value="Sweatshirts">Sweatshirts</option>
+            <option value="Shirts">Shirts</option>
+            <option value="Trousers">Trousers</option>
+            <option value="Jackets">Jackets</option>
+            <option value="Vests">Vests</option>
+            <option value="Shorts">Shorts</option>
+          </select>
+        </div>
+
+        <!-- Price Sort -->
+        <div>
+          <label class="form-label text-muted">Sort by Price</label>
+          <select class="form-select rounded-pill" (change)="onSortChange($event)">
+            <option value="">Default</option>
+            <option value="lowest price">Lowest to Highest</option>
+            <option value="highest price">Highest to Lowest</option>
+          </select>
         </div>
       </div>
     </div>
-  
-    <div *ngIf="products.length === 0" class="text-center mt-4">
-      <p class="text-muted">No products found in this category.</p>
-    </div>
-  </section> -->
 
-  <section class="my-4">
-    <h2 class="d-flex justify-content-center">Popular Products</h2>
-    
-    
-    <input type="search" class="form-control w-50 mx-auto my-3" placeholder="Search....." [(ngModel)]="searchTerm"/>
-    <h2 class="">{{categoryName}}</h2>
-  
-     
-<!-- Filters and Sorting in same row -->
-<div class="row mb-4 px-4 justify-content-center align-items-end text-center">
-  <!-- Sort by price -->
-  <div class="col-md-2">
-    <label class="form-label">Sort by price</label>
-    <select class="form-select" (change)="onSortChange($event)">
-      <option value="">Default</option>
-      <option value="lowest price">Lowest to Highest</option>
-      <option value="highest price">Highest to Lowest</option>
-    </select>
-  </div>
+    <!-- Product Grid -->
+    <div class="col-md-9">
+      <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4" *ngIf="products.length > 0">
+        <div class="col" *ngFor="let item of products | search:searchTerm">
+          <div class="card h-100 shadow-sm border-0 rounded-4 position-relative">
 
-  <!-- Color Filter -->
-  <div class="col-md-2">
-    <label class="form-label">Color</label>
-    <select class="form-select" [(ngModel)]="selectedColor" (change)="applyFilters()">
-      <option value="">All</option>
-      <option value="Red">Red</option>
-      <option value="Black">Black</option>
-      <option value="White">White</option>
-    </select>
-  </div>
+            <!-- ✅ Wishlist Icon (top-right of the card) -->
+            <button
+            class="btn btn-light position-absolute top-0 end-0 m-2 p-2 rounded-circle shadow-sm"
+            (click)="toggleWishlist(item)"
+            style="z-index: 10; background-color: white;"
+          >
+            <i
+              [ngClass]="wishlistService.isInWishlist(item.productId)
+                ? 'bi bi-heart-fill text-danger'
+                : 'bi bi-heart text-secondary'"
+              class="fs-5"
+            ></i>
+          </button>
 
-  <!-- Size Filter -->
-  <div class="col-md-2">
-    <label class="form-label">Size</label>
-    <select class="form-select" [(ngModel)]="selectedSize" (change)="applyFilters()">
-      <option value="">All</option>
-      <option value="S">S</option>
-      <option value="M">M</option>
-      <option value="L">L</option>
-    </select>
-  </div>
 
-  <!-- SubCategory Filter -->
-  <div class="col-md-3">
-    <label class="form-label">SubCategory</label>
-    <select class="form-select" [(ngModel)]="selectedSubCategory" (change)="applyFilters()">
-      <option value="">All</option>
-      <option value="Sweatshirts">Sweatshirts</option>
-      <option value="Shirts">Shirts</option>
-      <option value="Trousers">Trousers</option>
-      <option value="Jackets">Jackets</option>
-      <option value="Vests">Vests</option>
-      <option value="Shorts">Shorts</option>
-    </select>
-  </div>
-  <!-- إضافة dropdown لفرز السعر -->
-<div class="col-md-3">
-  <label class="form-label">Sort by Price</label>
-  <select class="form-select" [(ngModel)]="selectedSort" (change)="applyFilters()">
-    <option value="">Default</option>
-    <option value="lowest price">Lowest to Highest</option>
-    <option value="highest price">Highest to Lowest</option>
-  </select>
-</div>
-</div>
-    <!-- Dropdown for sorting by price
-    <div class="dropdown mb-3 ms-auto text-end">
-      <select class="form-select w-auto d-inline-block" (change)="onSortChange($event)">
-        <option value="">Sort by price</option>
-        <option value="lowest price">Lowest to Highest</option>
-        <option value="highest price">Highest to Lowest</option>
-      </select>
-    </div> -->
-    
-  
-    <div class="row g-4" *ngIf="products.length > 0">
-      <div class="col-md-3" *ngFor="let item of products | search:searchTerm">
-        <div class="product">
-          <div class="p-2 cursor-pointer">
-            <img height="200" [src]="item.productPicture" class="w-100" [alt]="item.productName" />
-            <h3 class="h6">{{ item.productName }}</h3>
-            <h4 class="h6">{{ item.description }}</h4>
-            <div class="d-flex align-items-center justify-content-between"  *ngFor="let variant of item.productVariants">
-                 <span>{{variant.price |currency:'EGP' }} </span> 
-        
+            <!-- Product Image -->
+            <div
+              class="position-relative cursor-pointer"
+              [routerLink]="['/detials', item.productId]"
+            >
+              <img
+                [src]="item.productPicture"
+                [alt]="item.productName"
+                class="card-img-top rounded-top"
+                style="height: 250px; object-fit: contain; background-color: #f8f9fa"
+              />
+            </div>
 
+            <!-- Card Body -->
+            <div class="card-body d-flex flex-column text-center">
+              <!-- Product Name -->
+              <h6 class="card-title fw-semibold text-dark">{{ item.productName }}</h6>
+
+              <!-- Product Description -->
+              <p class="text-muted small">{{ item.description | limitWords: 4 }}</p>
+
+              <!-- Product Variants -->
+              <div class="product-variants mb-2">
+                <div *ngFor="let variant of item.productVariants" class="variant-container">
+                  <p class="fw-bold text-primary">{{ variant.price | currency: 'EGP' }}</p>
                 </div>
+              </div>
+
+              <!-- Add to Cart / Details Button -->
+              <div class="mt-auto">
+                <a [routerLink]="['/detials', item.productId]">
+                  <button class="btn btn-outline-primary w-100 rounded-pill">
+                    Details
+                  </button>
+                </a>
+              </div>
+            </div>
+
           </div>
-          <button (click)=" addCart(item)" class="btn-main w-100">Add Product</button>
         </div>
       </div>
     </div>
-  
-    <div *ngIf="products.length === 0" class="text-center mt-4">
-      <p class="text-muted">No products found in this category.</p>
+
+
+      <!-- No Products Found -->
+      <div *ngIf="products.length === 0" class="text-center mt-5">
+        <p class="text-muted">No products found in this category.</p>
+      </div>
     </div>
-  </section>
-  
 
-
+</section>

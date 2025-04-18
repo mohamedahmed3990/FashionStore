@@ -1,0 +1,33 @@
+<div class="container mt-4">
+
+  <!-- Payment Section Title -->
+  <div class="bg-light p-2 border-bottom">
+    <h6 class="fw-semibold text-secondary">2. Payment Information</h6>
+  </div>
+
+  <!-- Tabs -->
+  <div class="d-flex border-bottom mt-2">
+    <a
+      class="flex-fill text-center py-2 text-decoration-none"
+      [routerLink]="['cash']"
+      routerLinkActive="active-tab"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <i class="bi bi-cash-coin"></i> Cash on Delivery
+    </a>
+    <a
+      class="flex-fill text-center py-2 text-decoration-none text-muted"
+      [routerLink]="['visa']"
+      routerLinkActive="active-tab"
+    >
+      <i class="bi bi-credit-card"></i> Card Payment
+    </a>
+  </div>
+
+  <!-- Child Route Content -->
+  <div class="mt-3">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>
+

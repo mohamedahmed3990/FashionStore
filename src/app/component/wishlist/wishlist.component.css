@@ -1,0 +1,26 @@
+/* src/app/components/wishlist/wishlist.component.css */
+.wishlist-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.wishlist-item-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.wishlist-item-details {
+  flex-grow: 1;
+  padding-left: 10px;
+}
+
+.wishlist-item-details button {
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}

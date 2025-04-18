@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -36,7 +36,8 @@ export class LoginComponent {
   constructor(
     private _AuthService: AuthService,
     private _Router: Router,
-    private _FormBuilder: FormBuilder
+    private _FormBuilder: FormBuilder,
+    private http: HttpClient
   ) {}
   msgError: string = '';
   isLoding: boolean = false;

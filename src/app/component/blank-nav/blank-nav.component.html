@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary shadow fixed-top py-3">
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow fixed-top p-0">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/product">
-      <img src="./assets/img/freshcart-logo.svg" alt="FreshCart Logo" />
+    <a class="navbar-brand" routerLink="/home">
+      <img src="./assets/img/Black and Yellow Online Store Logo (300 x 100 px) (160 x 100 px) (3).svg" alt="FreshCart Logo"  />
     </a>
     <button
       class="navbar-toggler"
@@ -38,8 +38,12 @@
         </li>
         <li class="nav-item me-4">
           <a routerLink="cart" class="nav-link cursor-pointer">
-            <i class="fa-solid fa-cart-shopping"></i>
-          </a>
+            <i class="fa-solid fa-cart-shopping position-relative">
+              <span *ngIf="cartCount > 0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ cartCount }}
+              </span>
+            </i>
+                      </a>
         </li>
         <li class="nav-item dropdown me-2">
           <a class="nav-link cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -47,13 +51,20 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end mt-2 shadow">
             <li>
+              <a class="dropdown-item cursor-pointer" [routerLink]="['/profile']">
+                Personal Information
+              </a>
+            </li>
+            <li>
               <a
-                class="dropdown-item nav-link cursor-pointer text-light btn-main"
+                class="dropdown-item nav-link cursor-pointer text-light bg-danger"
                 routerLinkActive="active-link"
+                routerLink="/login"
                 (click)="logoutUser()"
                 >Logout</a
               >
             </li>
+
           </ul>
         </li>
       </ul>

@@ -1,0 +1,22 @@
+.card-img-top {
+  transition: transform 0.3s ease;
+}
+.card-img-top:hover {
+  transform: scale(1.05);
+}
+.product-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* Ensure the container has full height */
+}
+
+.product-variants {
+  margin-top: auto; /* Push content to the bottom */
+}
+
+.variant-container {
+  display: flex;
+  justify-content: flex-end; /* Align text to the right */
+}
+

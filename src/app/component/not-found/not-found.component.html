@@ -1,39 +1,28 @@
-<div class="container text-center py-5 col-4">
-  <img src="../../../assets/Not-found/notFound1(3x).png" alt="Oops" class="img-fluid mb-4" style="max-width: 300px;" />
+<div class="container d-flex flex-column justify-content-center align-items-center py-5 min-vh-100">
+  <!-- صورة الخطأ -->
+  <img src="../../../assets/Not-found/notFound1(3x).png" alt="Oops" class="img-fluid mb-4" style="max-width: 250px;" />
 
-  <div class="bg-light p-3 rounded mb-4">
-    <p class="mb-0 fw-bold">The page you are looking for is currently unavailable.</p>
+  <!-- رسالة الخطأ -->
+  <div class="bg-light p-4 rounded shadow mb-4 text-center w-75">
+    <p class="mb-2 fw-bold text-danger">The page you are looking for is currently unavailable.</p>
     <p>Would you like to try the following options?</p>
   </div>
 
-  <div class="input-group mb-4 w-75 mx-auto" style="max-width: 500px;">
-    <span class="input-group-text"><i class="bi bi-search"></i></span>
-    <input type="text" class="form-control" placeholder="What are you looking for?">
-    <button class="btn btn-outline-secondary">Search</button>
+  <!-- العودة إلى الصفحة الرئيسية -->
+  <div class="d-grid gap-2 col-8 col-md-6 mx-auto mb-4">
+    <a [routerLink]="'/home'" class="btn btn-primary py-3 px-4">Back to Home Page</a>
   </div>
 
-  <div class="d-grid gap-2 col-6 mx-auto mb-4">
-    <a [routerLink]="'/home'" class="btn btn-primary">Back to Home Page</a>
-  </div>
-
-  <div class="row row-cols-2 row-cols-md-3 g-2 justify-content-center ">
+  <!-- الأزرار المختلفة -->
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 justify-content-center">
     <div class="col">
-      <a routerLink="/woman" class="btn btn-outline-primary w-100 ">Woman</a>
+      <a routerLink="/product/Women" class="btn btn-outline-primary w-100 py-4 px-4 d-flex justify-content-center align-items-center">Women</a>
     </div>
     <div class="col">
-      <a routerLink="/man" class="btn btn-outline-primary w-100">Man</a>
+      <a routerLink="/product/Men" class="btn btn-outline-primary w-100 py-4 px-4 d-flex justify-content-center align-items-center">Men</a>
     </div>
     <div class="col">
-      <a routerLink="/kids" class="btn btn-outline-primary w-100">Kids</a>
-    </div>
-    <div class="col">
-      <a routerLink="/baby" class="btn btn-outline-primary w-100">Baby</a>
-    </div>
-    <div class="col">
-      <a routerLink="/home" class="btn btn-outline-primary w-100">LCW Home</a>
-    </div>
-    <div class="col">
-      <a routerLink="/outlet" class="btn btn-outline-primary w-100">Outlet</a>
+      <a routerLink="/product/Kids" class="btn btn-outline-primary w-100 py-4 px-4 d-flex justify-content-center align-items-center">Kids</a>
     </div>
   </div>
 </div>

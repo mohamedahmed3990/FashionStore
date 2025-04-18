@@ -1,0 +1,19 @@
+.navbar-brand img {
+    margin: 0;
+    padding: 0;
+    margin-top: -22px; /* رفع الصورة إلى أعلى قليلاً */
+
+  }
+  
+  .navbar .container-fluid {
+    display: flex;
+    justify-content: space-between; /* يجعل العناصر موزعة بشكل مناسب */
+    align-items: center; /* محاذاة العناصر عموديًا */
+  }
+  
+  .navbar-nav {
+    display: flex;
+    align-items: center; /* محاذاة الروابط عموديًا مع اللوجو */
+  }
+  
+  

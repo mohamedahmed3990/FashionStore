@@ -1,0 +1,271 @@
+* {
+  box-sizing: border-box;
+}
+
+.container-fluid {
+  margin-top: 80px;
+}
+
+
+h3 {
+  color: var(--teal-green);
+}
+
+.cart-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--teal-green);
+}
+
+.cart-summary {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.items-count {
+  font-weight: 500;
+  color: var(--dark-gray);
+}
+
+
+.btn-clear {
+  padding: 8px 16px;
+  border-radius: var(--border-radius, 8px);
+  border: 1px solid #ddd;
+  background-color: transparent;
+  color: var(--dark-gray);
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition, all 0.3s ease);
+  display: flex;
+  align-items: center;
+}
+
+.btn-clear:hover {
+  color: white;
+  border-color: #dc3545;
+  background-color: #dc3545;
+}
+
+/* Cart Items Container */
+.cart-items-container {
+  background-color: var(--light-gray);
+  border-radius: var(--border-radius);
+  padding: 16px;
+  box-shadow: var(--box-shadow);
+  max-height: 70vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.cart-items-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cart-items-container::-webkit-scrollbar-thumb {
+  background-color: var(--teal-green);
+  border-radius: 6px;
+}
+
+.empty-cart-msg {
+  text-align: center;
+  color: var(--dark-gray);
+  padding: 2rem 0;
+}
+
+/* Cart Summary Card */
+.cart-summary-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 24px;
+  box-shadow: var(--box-shadow);
+}
+
+.summary-title {
+  color: var(--teal-green);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  color: var(--dark-gray);
+}
+
+.discount {
+  color: var(--danger);
+}
+
+.free-delivery {
+  color: var(--teal-green);
+  font-weight: 500;
+}
+
+.summary-divider {
+  height: 1px;
+  background-color: #eee;
+  margin: 16px 0;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  font-size: 18px;
+}
+
+.btn-checkout {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 30px;
+  background-color: var(--teal-green);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background-color: var(--teal-green);
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 30px;
+  transition: 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #2C6D5A;
+  transform: scale(1.05);
+}
+
+.btn-checkout:hover {
+  background-color: #2a7363;
+  transform: translateY(-2px);
+}
+
+/* Empty Cart */
+.empty-cart {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.empty-cart-icon {
+  font-size: 48px;
+  color: var(--teal-green);
+  margin-bottom: 1.5rem;
+  opacity: 0.7;
+}
+
+.empty-cart h4 {
+  color: var(--dark-gray);
+  margin-bottom: 0.5rem;
+}
+
+.empty-cart p {
+  color: #999;
+  margin-bottom: 2rem;
+}
+
+.btn-shop {
+  padding: 10px 24px;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--teal-green);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-shop:hover {
+  background-color: #2a7363;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .cart-summary-card {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .cart-summary {
+    gap: 10px;
+  }
+
+  .btn-clear {
+    align-self: flex-end;
+  }
+
+  .cart-items-container {
+    max-height: none;
+    overflow: visible;
+    padding: 12px 8px;
+  }
+
+}
+
+@media (max-width: 576px) {
+  .cart-title::after {
+    width: 40px;
+  }
+
+  .summary-total {
+    font-size: 16px;
+  }
+}
+
+.modal.fade.show {
+  z-index: 1050;
+}
+
+.modal-backdrop.fade.show {
+  z-index: 1040;
+  opacity: 0.5;
+}
+
+.modal.fade.show {
+  animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+/* Secondary button styling */
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}

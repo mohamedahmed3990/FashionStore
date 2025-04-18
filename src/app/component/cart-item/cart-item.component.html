@@ -1,0 +1,37 @@
+<div 
+  class="cart-item-image" 
+  [ngStyle]="{'background-image': 'url( cart.pictureUrl )'}">
+</div>
+  <div class="cart-item-details">
+    <div class="cart-item-name">
+      <h5 class="item-title">{{cart.productName}}</h5>
+      <button (click)="removeItem()" class="btn-remove" aria-label="Remove item">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="cart-item-info">
+      <div class="info-block">
+        <span class="info-label">Price</span>
+        <span class="info-value">{{cart.price| currency:' ':'symbol':'1.2-2' }} EGP</span>
+      </div>
+
+      <div class="info-block quantity-block">
+        <span class="info-label">Quantity</span>
+        <div class="quantity-controls">
+          <button (click)="decrease()" class="btn-quantity" [disabled]="cart.quantity <= 1">
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <span class="quantity-value">{{cart.quantity}}</span>
+          <button (click)="increase()" class="btn-quantity">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <span class="info-label">Total</span>
+        <span class="info-value total-price">{{ totalPrice | currency:' ':'symbol':'1.2-2' }} EGP</span>
+      </div>
+    </div>
+  </div>
