@@ -1,0 +1,39 @@
+<div class="admin-container">
+    <div class="header">
+      <h1>Products Management</h1>
+      <button [routerLink]="['/admin-page/AddProductForm']" class="add-product-btn">Add Product</button>
+    </div>
+  
+    <div class="product-table-container">
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>SubCategory ID</th>
+            <th>SubCategory Name</th>
+            <th>Category Name</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.subCategoryId }}</td>
+            <td>{{ product.subCategoryName }}</td>
+            <td>{{ product.categoryName }}</td>
+            <td>
+                <button class="update-btn" (click)="updateProduct(product.id)">Update</button>
+              </td>
+              <td>
+                <button class="delete-btn" (click)="deleteProduct(product.id)">Delete</button>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

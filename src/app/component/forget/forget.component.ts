@@ -1,4 +1,6 @@
-import { Router } from '@angular/router';
+// ----------------------Haidy Code----------------------------
+
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -15,7 +17,7 @@ import { GlobalServiceService } from '../../shared/service/global-service.servic
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './forget.component.html',
-  styleUrls: ['./forget.component.scss'],
+  styleUrls: ['./forget.component.css'],
 })
 export class ForgetpasswordComponent {
   constructor(
@@ -38,6 +40,7 @@ export class ForgetpasswordComponent {
   //     Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])(?!^(.)\1+$).{6,}$/),
   //   ]),
   // });
+
   forgetPass(): void {
     let userEmail = this.forgetForm.value;
     this.email = userEmail.email;
@@ -107,3 +110,5 @@ export class ForgetpasswordComponent {
   //   });
   // }
 }
+
+

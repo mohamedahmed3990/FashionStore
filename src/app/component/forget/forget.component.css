@@ -1,1 +1,145 @@
 /*# sourceMappingURL=forget.component.css.map */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
+}
+
+.forget-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    margin: 0;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.shape-1 {
+    width: 300px;
+    height: 300px;
+    top: -100px;
+    left: -100px;
+    background: linear-gradient(45deg, #e3f2fd, #bbdefb);
+}
+
+.shape-2 {
+    width: 200px;
+    height: 200px;
+    bottom: -50px;
+    right: 0px;
+    background: linear-gradient(45deg, #e8f5e9, #c8e6c9);
+}
+
+.shape-3 {
+    width: 150px;
+    height: 150px;
+    top: 50%;
+    right: 20%;
+    background: linear-gradient(45deg, #f3e5f5, #e1bee7);
+}
+
+.forget-wrapper~.container {
+    padding: 0 !important;
+    max-width: 100% !important;
+}
+
+.auth-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f7fa;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.auth-card {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #4a5568;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.form-control {
+    height: 45px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: #2f80ed;
+    border: none;
+    padding: 10px 0;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #1366d6;
+}
+
+.icon-success {
+    font-size: 48px;
+    color: #2f80ed;
+}
+
+.h2_style {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: Encode sans Expanded;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.reset-btn{
+    width: 100%;
+  padding: 14px;
+  background: linear-gradient(45deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+  box-shadow: 0 4px 6px rgba(52, 152, 219, 0.2);
+}
+
+.reset-btn:hover {
+    background: linear-gradient(45deg, #2980b9, #3498db);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(52, 152, 219, 0.3);
+  }

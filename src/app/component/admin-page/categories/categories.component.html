@@ -1,0 +1,51 @@
+<div class="admin-container">
+    <div class="header">
+        <h1>Categories Management</h1>
+        <button [routerLink]="['/admin-page/AddCategoryForm']" class="add-category-btn">Add Category</button>
+    </div>
+
+    <div class="category-table-container">
+        <table class="category-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let category of categories; let i = index">
+                    <td>{{ category.id }}</td>
+                    <!-- <td>{{ color.name }}</td> -->
+                    <td>
+                        <ng-container *ngIf="editingCategoryId !== category.id; else editName">
+                            {{ category.name }}
+                        </ng-container>
+                        <ng-template #editName>
+                            <input type="text" [(ngModel)]="categories[i].name" class="edit-input"
+                                (keyup.enter)="saveCategory(category.id, i)" (keyup.escape)="cancelEdit()"
+                                placeholder="Enter color name" required />
+                        </ng-template>
+                    </td>
+                    <!-- <td>
+                        <button class="update-btn" (click)="updateColor(color.id)">Update</button>
+                    </td> -->
+                    <td>
+                        <ng-container *ngIf="editingCategoryId !== category.id; else saveCancelButtons">
+                            <button class="update-btn" (click)="editCategory(category.id, i)">Edit</button>
+                        </ng-container>
+                        <ng-template #saveCancelButtons>
+                            <button class="save-btn" (click)="saveCategory(category.id, i)">Save</button>
+                            <button class="cancel-btn" (click)="cancelEdit()">Cancel</button>
+                        </ng-template>
+                    </td>
+                    
+                    <td>
+                        <button class="delete-btn" (click)="deleteCategory(category.id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

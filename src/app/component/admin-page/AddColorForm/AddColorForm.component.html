@@ -1,0 +1,54 @@
+<!-- <div class="form-container">
+    <h2>Add New Color</h2>
+  
+    <form [formGroup]="addColorForm" (ngSubmit)="onSubmit()" class="color-form">
+  
+       Color Name 
+      <div class="form-group">
+        <label for="colorName">Color Name:</label>
+        <input id="colorName" formControlName="colorName" type="text" placeholder="Enter color name" />
+        <div *ngIf="addColorForm.get('colorName')?.invalid && addColorForm.get('colorName')?.touched" class="error">
+          color name is required.
+        </div>
+      </div>
+  
+       Color Hexa 
+      <div class="form-group">
+        <label for="hexa">Hexa:</label>
+        <input id="hexa" formControlName="colorName" type="text" placeholder="Enter color hexa"/>
+        <div *ngIf="addColorForm.get('hexa')?.invalid && addColorForm.get('hexa')?.touched" class="error">
+          hexa is required.
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="addColorForm.invalid" class="submit-btn">Add Color</button>
+    </form> -->
+
+    <div class="form-container">
+        <h2>Add New Color</h2>
+      
+        <form [formGroup]="addColorForm" (ngSubmit)="onSubmit()" class="color-form">
+      
+          <!-- Color Name -->
+          <div class="form-group">
+            <label for="Name">Color Name:</label>
+            <input id="Name" formControlName="Name" type="text" placeholder="Enter color name" />
+            <div *ngIf="addColorForm.get('Name')?.invalid && addColorForm.get('Name')?.touched" class="error">
+              Color name is required.
+            </div>
+          </div>
+      
+          <!-- Color Hexa -->
+          <div class="form-group">
+            <label for="Hexa">Hex Code:</label>
+            <input id="Hexa" formControlName="Hexa" type="text" placeholder="#FFFFFF" />
+            <div *ngIf="addColorForm.get('Hexa')?.invalid && addColorForm.get('Hexa')?.touched" class="error">
+              <span *ngIf="addColorForm.get('Hexa')?.hasError('required')">Hex code is required.</span>
+              <span *ngIf="addColorForm.get('Hexa')?.hasError('pattern')">Please enter a valid hex color code (e.g., #FFFFFF or #FFF)</span>
+            </div>
+            <div class="color-preview" [style.background-color]="addColorForm.get('Hexa')?.value"></div>
+          </div>
+    
+          <button type="submit" [disabled]="addColorForm.invalid" class="submit-btn">Add Color</button>
+        </form>
+    </div>

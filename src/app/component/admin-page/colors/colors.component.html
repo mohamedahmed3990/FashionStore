@@ -1,0 +1,63 @@
+<div class="admin-container">
+    <div class="header">
+        <h1>Colors Management</h1>
+        <button [routerLink]="['/admin-page/AddColorForm']" class="add-color-btn">Add Color</button>
+    </div>
+
+    <div class="color-table-container">
+        <table class="color-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Hexa</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let color of colors; let i = index">
+                    <td>{{ color.id }}</td>
+                    <!-- <td>{{ color.name }}</td> -->
+                    <td>
+                        <ng-container *ngIf="editingColorId !== color.id; else editName">
+                            {{ color.name }}
+                        </ng-container>
+                        <ng-template #editName>
+                            <input type="text" [(ngModel)]="colors[i].name" class="edit-input"
+                                (keyup.enter)="saveColor(color.id, i)" (keyup.escape)="cancelEdit()"
+                                placeholder="Enter color name" required />
+                        </ng-template>
+                    </td>
+                    <!-- <td>{{ color.hexa }}</td> -->
+                    <td>
+                        <ng-container *ngIf="editingColorId !== color.id; else editHexa">
+                            {{ color.hexa }}
+                        </ng-container>
+                        <ng-template #editHexa>
+                            <input type="text" [(ngModel)]="colors[i].hexa" class="edit-input"
+                                (keyup.enter)="saveColor(color.id, i)" (keyup.escape)="cancelEdit()"
+                                placeholder="Enter hex color (e.g., #FF0000)" pattern="^#[0-9A-Fa-f]{6}$" required />
+                        </ng-template>
+                    </td>
+                    <!-- <td>
+                        <button class="update-btn" (click)="updateColor(color.id)">Update</button>
+                    </td> -->
+                    <td>
+                        <ng-container *ngIf="editingColorId !== color.id; else saveCancelButtons">
+                            <button class="update-btn" (click)="editColor(color.id, i)">Edit</button>
+                        </ng-container>
+                        <ng-template #saveCancelButtons>
+                            <button class="save-btn" (click)="saveColor(color.id, i)">Save</button>
+                            <button class="cancel-btn" (click)="cancelEdit()">Cancel</button>
+                        </ng-template>
+                    </td>
+                    
+                    <td>
+                        <button class="delete-btn" (click)="deleteColor(color.id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

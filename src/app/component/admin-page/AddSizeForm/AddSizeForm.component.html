@@ -1,0 +1,16 @@
+<div class="form-container">
+    <h2>Add New Color</h2>
+  
+    <form [formGroup]="AddSizeForm" (ngSubmit)="onSubmit()" class="size-form">
+  
+      <!-- Color Name -->
+      <div class="form-group">
+        <label for="Name">Size Name:</label>
+        <input id="Name" formControlName="Name" type="text" placeholder="Enter size name" />
+        <div *ngIf="AddSizeForm.get('Name')?.invalid && AddSizeForm.get('Name')?.touched" class="error">
+          Size name is required.
+        </div>
+      </div>
+      <button type="submit" [disabled]="AddSizeForm.invalid" class="submit-btn">Add Size</button>
+    </form>
+</div>

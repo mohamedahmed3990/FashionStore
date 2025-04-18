@@ -1,0 +1,22 @@
+<div class="admin-dashboard">
+  <h1 class="dashboard-title">Admin Dashboard</h1>
+
+  <div class="dashboard-grid" *ngIf="isDashboardView()">
+    @for (item of dashboardItems; track item.title) {
+      <mat-card class="dashboard-card" [routerLink]="['/admin-page', item.link]">
+        <div class="card-header">
+          <mat-icon class="card-icon" [style.color]="item.color">{{item.icon}}</mat-icon>
+          <h2 class="card-title">{{item.title}}</h2>
+        </div>
+        <p class="card-description">{{item.description}}</p>
+        <div class="card-footer">
+          <button mat-button [style.color]="item.color">
+            Manage <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </div>
+      </mat-card>
+    }
+  </div>
+
+  <router-outlet></router-outlet>
+</div>

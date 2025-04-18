@@ -38,16 +38,24 @@ export class ResetPasswordComponent implements OnInit {
       token: this.etoken,
       newPassword: this.resetPassForm.value.newPassword
     };
-  
+    console.log('Sending reset data:', resetData)
     this._GlobalServiceService.newPass(resetData).subscribe({
       next: (res) => {
         console.log('Password reset successful');
-        this._Router.navigate(['/home']);
-      },
-      error: (err) => {
-        this.msg = err.error.message;
-      },
-    });
+        this._Router.navigate(['/home']).then(navResult => {
+          console.log('Navigation result:', navResult);
+      }).catch(err => {
+        console.error('Navigation error:', err);
+      });
+    },
+    error: (err) => {
+      console.error('Error details:', err); // More detailed error logging
+      this.msg = err.error.message;
+    },
+    complete: () => {
+      console.log('Request completed'); // Check if this fires
+    }
+  });
   }
   
 // resetPss(): void {

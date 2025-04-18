@@ -6,14 +6,28 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
 import { RegisterComponent } from './component/register/register.component';
 import { LoginComponent } from './component/login/login.component';
 import { ProductComponent } from './component/product/product.component';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './component/home/home.component';
 import { NotFoundComponent } from './component/not-found/not-found.component';
 import { TestComponent } from './component/test/test.component';
 
+import { RoleGuard } from './guards/role.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { ProductsComponent } from './component/admin-page/products/products.component';
+import { AddProductFormComponent } from './component/admin-page/AddProductForm/AddProductForm.component';
+import { AdminPageComponent } from './component/admin-page/admin-page.component';
+import { colorsComponent } from './component/admin-page/colors/colors.component';
+import { AddColorFormComponent } from './component/admin-page/AddColorForm/AddColorForm.component';
+import { SizesComponent } from './component/admin-page/sizes/sizes.component';
+import { AddSizeFormComponent } from './component/admin-page/AddSizeForm/AddSizeForm.component';
+import { CategoriesComponent } from './component/admin-page/categories/categories.component';
+import { AddCategoryFormComponent } from './component/admin-page/AddCategoryForm/AddCategoryFormcomponent';
+import { SubCategoriesComponent } from './component/admin-page/subcategories/subcategories.component';
+import { AddSubCategoryFormComponent } from './component/admin-page/AddSubCategoryForm/AddSubCategoryForm.component';
+
+
 export const routes: Routes = [
   {
-    
     path: '',
     // canActivate: [loginGuard],
     loadComponent: () =>
@@ -55,15 +69,48 @@ export const routes: Routes = [
         title: 'wishlist',
       },
       {
-        path: '**',
-        loadComponent: () =>
-          import('./component//not-found/not-found.component').then(
-            (m) => m.NotFoundComponent
-          ),
-        title: 'notFound',
+        path: 'admin-page',
+        component: AdminPageComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        title: 'Admin Dashboard',
+        children: [
+          // {
+          //   path: '',  // This will match /admin-page
+          //   component: AdminPageComponent
+          // },
+          {
+            path: 'products',  // This will match /admin-page/products
+            component: ProductsComponent
+          },
+          { path: 'categories', component: CategoriesComponent },
+          { path: 'subcategories', component: SubCategoriesComponent },
+          { path: 'sizes', component: SizesComponent },
+          { path: 'colors', component: colorsComponent },
+          {
+            path: 'AddProductForm',
+            component: AddProductFormComponent
+          },
+          {
+            path: 'AddColorForm',
+            component: AddColorFormComponent
+          },
+          {
+            path: 'AddSizeForm',
+            component: AddSizeFormComponent
+          },
+          {
+            path: 'AddCategoryForm',
+            component: AddCategoryFormComponent
+          },
+          {
+            path: 'AddSubCategoryForm',
+            component: AddSubCategoryFormComponent
+          },
+        ]
       },
       
-    ],
+
+    ]
   },
   {
     path: '',
@@ -86,15 +133,15 @@ export const routes: Routes = [
             (m) => m.ForgetpasswordComponent
           ),
         title: 'Forgetpassword',
-      },{
+      },
+      {
         path: 'reset-password',
         loadComponent: () =>
           import('./component/reset-password/reset-password.component').then(
             (m) => m.ResetPasswordComponent
           ),
         title: 'reset-password'
-      }
-      ,
+      },
       {
         path: 'register',
         loadComponent: () =>
@@ -103,6 +150,7 @@ export const routes: Routes = [
           ),
         title: 'register',
       },
-    ],
-  },
+    ]
+  }
 ];
+

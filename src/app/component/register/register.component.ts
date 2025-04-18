@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from './../../shared/service/auth.service';
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2  } from '@angular/core';
 import {
   FormBuilder,
   FormControlOptions,
@@ -11,20 +11,32 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  styleUrl: './register.component.css',
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit, OnDestroy{
   constructor(
+    private renderer: Renderer2,
     private _AuthService: AuthService,
     private _Router: Router,
     private _FormBuilder: FormBuilder
   ) {}
+
+  ngOnInit(): void {
+    // Set body background color when RegisterComponent is active
+    this.renderer.setStyle(document.body, 'background-color', '#f0f2f5');
+  }
+
+  ngOnDestroy(): void {
+    // Optional: Reset it when navigating away
+    this.renderer.removeStyle(document.body, 'background-color');
+  }
 
   msgError: string = '';
   isLoding: boolean = false;

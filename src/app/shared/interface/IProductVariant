@@ -1,0 +1,4 @@
+export interface ProductVariant {
+  colorId: number | null;  // Allows either a number or null
+  sizeId: number | null;   // Allows either a number or null
+}

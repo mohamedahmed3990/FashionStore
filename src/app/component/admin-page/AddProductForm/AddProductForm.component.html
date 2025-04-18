@@ -1,0 +1,145 @@
+<!-- <div class="add-product-form-container">
+  <h2>Add New Product</h2>
+
+  <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="productName">Product Name:</label>
+      <input id="productName" formControlName="productName" type="text" />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" formControlName="description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="categoryName">Category Name:</label>
+      <input id="categoryName" formControlName="categoryName" type="text" />
+    </div>
+
+    <div class="form-group">
+      <label for="subCategoryName">Sub Category Name:</label>
+      <input id="subCategoryName" formControlName="subCategoryName" type="text" />
+    </div>
+
+    
+    <div formArrayName="productVariants">
+      <div *ngFor="let variant of productVariants.controls; let i = index" [formGroupName]="i" class="variant">
+        <div class="form-group">
+          <label for="color">Color:</label>
+          <input id="color" formControlName="color" type="text" />
+        </div>
+
+        <div class="form-group">
+          <label for="size">Size:</label>
+          <input id="size" formControlName="size" type="text" />
+        </div>
+
+        <div class="form-group">
+          <label for="price">Price:</label>
+          <input id="price" formControlName="price" type="number" />
+        </div>
+
+        <button type="button" (click)="removeVariant(i)">Remove Variant</button>
+      </div>
+    </div>
+
+    <button type="button" (click)="addVariant()">Add Another Variant</button>
+    <button type="submit" [disabled]="addProductForm.invalid">Add Product</button>
+  </form>
+</div> -->
+<!-- ///////////////////////////////////////////////////////////////////////////////// -->
+<div class="form-container">
+  <h2>Add New Product</h2>
+
+  <form [formGroup]="addProductForm" (ngSubmit)="onSubmit(addProductForm)" class="product-form">
+
+    
+    <div class="form-group">
+      <label for="productName">Product Name:</label>
+      <input id="productName" formControlName="productName" type="text" placeholder="Enter product name" />
+      <div *ngIf="addProductForm.get('productName')?.invalid && addProductForm.get('productName')?.touched"
+        class="error">
+        Product name is required.
+      </div>
+    </div>
+
+    
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" formControlName="description" placeholder="Enter product description"></textarea>
+      <div *ngIf="addProductForm.get('description')?.invalid && addProductForm.get('description')?.touched"
+        class="error">
+        Description is required.
+      </div>
+    </div>
+
+    
+    <div class="form-group">
+      <label for="categoryName">Category Name:</label>
+      <select id="categoryName" formControlName="categoryName">
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+      </select>
+    </div>
+
+    
+    <div class="form-group">
+      <label for="subCategoryName">Sub Category Name:</label>
+      <select id="subCategoryName" formControlName="subCategoryName">
+        <option *ngFor="let subCategory of subCategories" [value]="subCategory.id">{{ subCategory.name }}</option>
+      </select>
+    </div>
+
+    
+
+    <div class="form-group">
+      <label for="images">Product Images:</label>
+      <input id="images" type="file" (change)="onFileSelected($event)" multiple />
+      <div class="image-preview-container">
+        <img *ngFor="let preview of imagePreviews" [src]="preview" class="image-preview" alt="Image Preview" />
+      </div>
+    </div>
+
+
+   
+    <div formArrayName="productVariants" class="variants-container">
+      <div *ngFor="let variant of productVariants.controls; let i = index" [formGroupName]="i" class="variant-form">
+
+       
+        <div class="form-group">
+          <label for="color-{{i}}">Color:</label>
+          <select id="color-{{i}}" formControlName="colorId">
+            <option value="" disabled>Select color</option>
+            <option *ngFor="let color of colors" [value]="color.id">
+              {{ color.name }}
+            </option>
+          </select>
+        </div>
+
+       
+        <div class="form-group">
+          <label for="size-{{i}}">Size:</label>
+          <select id="size-{{i}}" formControlName="sizeId">
+            <option value="" disabled>Select size</option>
+            <option *ngFor="let size of sizes" [value]="size.id">
+              {{ size.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="price">Price:</label>
+          <input id="price" formControlName="price" type="number" placeholder="Enter price" />
+        </div>
+
+        <button type="button" (click)="removeVariant(i)" class="remove-btn">Remove Variant</button>
+      </div>
+    </div>
+
+    <button type="button" (click)="addVariant()" class="add-btn">Add Another Variant</button>
+
+    
+    <button type="submit" [disabled]="addProductForm.invalid" class="submit-btn">Add Product</button>
+  </form>
+</div>
+

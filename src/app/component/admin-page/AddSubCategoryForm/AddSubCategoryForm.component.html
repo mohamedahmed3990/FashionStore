@@ -1,0 +1,27 @@
+
+<div class="form-container">
+  <h2>Add New SubCategory</h2>
+
+  <form [formGroup]="addSubCategoryForm" (ngSubmit)="onSubmit()" class="product-form">
+
+    <!-- Product Name -->
+    <div class="form-group">
+      <label for="subCategoryName">SubCategory Name:</label>
+      <input id="subCategoryName" formControlName="subCategoryName" type="text" placeholder="Enter Subcategory name" />
+      <div *ngIf="addSubCategoryForm.get('subCategoryName')?.invalid && addSubCategoryForm.get('subCategoryName')?.touched" class="error">
+        Subcategory name is required.
+      </div>
+    </div>
+
+    <!-- Category Name -->
+    <div class="form-group">
+      <label for="categoryName">Category Name:</label>
+      <select id="categoryName" formControlName="categoryName">
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+      </select>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" [disabled]="addSubCategoryForm.invalid" class="submit-btn">Add Product</button>
+  </form>
+</div>

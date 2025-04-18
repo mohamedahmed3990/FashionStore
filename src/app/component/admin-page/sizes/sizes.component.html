@@ -1,0 +1,51 @@
+<div class="admin-container">
+    <div class="header">
+        <h1>Sizes Management</h1>
+        <button [routerLink]="['/admin-page/AddSizeForm']" class="add-size-btn">Add Size</button>
+    </div>
+
+    <div class="size-table-container">
+        <table class="size-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let size of sizes; let i = index">
+                    <td>{{ size.id }}</td>
+                    <!-- <td>{{ color.name }}</td> -->
+                    <td>
+                        <ng-container *ngIf="editingSizeId !== size.id; else editName">
+                            {{ size.name }}
+                        </ng-container>
+                        <ng-template #editName>
+                            <input type="text" [(ngModel)]="sizes[i].name" class="edit-input"
+                                (keyup.enter)="saveSize(size.id, i)" (keyup.escape)="cancelEdit()"
+                                placeholder="Enter color name" required />
+                        </ng-template>
+                    </td>
+                    <!-- <td>
+                        <button class="update-btn" (click)="updateColor(color.id)">Update</button>
+                    </td> -->
+                    <td>
+                        <ng-container *ngIf="editingSizeId !== size.id; else saveCancelButtons">
+                            <button class="update-btn" (click)="editSize(size.id, i)">Edit</button>
+                        </ng-container>
+                        <ng-template #saveCancelButtons>
+                            <button class="save-btn" (click)="saveSize(size.id, i)">Save</button>
+                            <button class="cancel-btn" (click)="cancelEdit()">Cancel</button>
+                        </ng-template>
+                    </td>
+                    
+                    <td>
+                        <button class="delete-btn" (click)="deleteSize(size.id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

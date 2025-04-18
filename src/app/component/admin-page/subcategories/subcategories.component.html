@@ -1,0 +1,75 @@
+<div class="admin-container">
+    <div class="header">
+        <h1>SubCategories Management</h1>
+        <button [routerLink]="['/admin-page/AddSubCategoryForm']" class="add-subcategory-btn">Add SubCategory</button>
+    </div>
+
+    <div class="subcategory-table-container">
+        <table class="subcategory-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category ID</th>
+                    <th>Category Name</th>
+                    <!-- <th>Update</th> -->
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let subcategory of subcategories; let i = index">
+                    <td>{{ subcategory.id }}</td>
+                    <!-- <td>{{ color.name }}</td> -->
+                    <td>
+                        <ng-container *ngIf="editingSubCategoryId !== subcategory.id; else editName">
+                            {{ subcategory.name }}
+                        </ng-container>
+                        <ng-template #editName>
+                            <input type="text" [(ngModel)]="subcategories[i].name" class="edit-input"
+                                (keyup.enter)="saveSubCategory(subcategory.id, i)" (keyup.escape)="cancelEdit()"
+                                placeholder="Enter SubCategory name" required />
+                        </ng-template>
+                    </td>
+
+                    <td>
+                        <ng-container *ngIf="editingSubCategoryId !== subcategory.id; else editId">
+                            {{ subcategory.parentId }}
+                        </ng-container>
+                        <ng-template #editId>
+                            <input type="text" [(ngModel)]="subcategories[i].parentId" class="edit-input"
+                                (keyup.enter)="saveSubCategory(subcategory.id, i)" (keyup.escape)="cancelEdit()"
+                                placeholder="Enter parent Category id" required />
+                        </ng-template>
+                    </td>
+
+                    <td>
+                        <ng-container *ngIf="editingSubCategoryId !== subcategory.id; else editName">
+                            {{ subcategory.parentName }}
+                        </ng-container>
+                        <ng-template #editName>
+                            <input type="text" [(ngModel)]="subcategories[i].parentName" class="edit-input"
+                                (keyup.enter)="saveSubCategory(subcategory.id, i)" (keyup.escape)="cancelEdit()"
+                                placeholder="Enter category name" required />
+                        </ng-template>
+                    </td>
+                    <!-- <td>
+                        <button class="update-btn" (click)="updateColor(color.id)">Update</button>
+                    </td> -->
+                    <!-- <td>
+                        <ng-container *ngIf="editingSubCategoryId !== subcategory.id; else saveCancelButtons">
+                            <button class="update-btn" (click)="editSubCategory(subcategory.id, i)">Edit</button>
+                        </ng-container>
+                        <ng-template #saveCancelButtons>
+                            <button class="save-btn" (click)="saveSubCategory(subcategory.id, i)">Save</button>
+                            <button class="cancel-btn" (click)="cancelEdit()">Cancel</button>
+                        </ng-template>
+                    </td> -->
+                    
+                    <td>
+                        <button class="delete-btn" (click)="deleteSubCategory(subcategory.id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

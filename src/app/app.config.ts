@@ -6,6 +6,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 export const appConfig: ApplicationConfig = {
@@ -18,6 +19,6 @@ export const appConfig: ApplicationConfig = {
       closeButton: true,
       timeOut: 2000,
     }),
-    provideAnimations(),
+    provideAnimations(), provideAnimationsAsync(),
   ],
 };
